@@ -17,18 +17,7 @@ export function Footer() {
   };
 
   return (
-    <footer 
-      role="contentinfo"
-      aria-label="Site footer"
-      style={{ 
-        borderTop: '1px solid var(--border)', 
-        padding: '4rem 0 2rem 0', 
-        marginTop: '6rem', 
-        background: 'var(--bg-secondary)',
-        position: 'relative',
-        overflow: 'hidden'
-      }}
-    >
+    <footer role="contentinfo" aria-label="Site footer" className="site-footer">
       {/* Background Glow */}
       <div style={{
         position: 'absolute',
@@ -43,12 +32,7 @@ export function Footer() {
       }}></div>
 
       <div className="container">
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-          gap: '3rem',
-          marginBottom: '4rem'
-        }}>
+        <div className="footer-grid">
           {/* Column 1: Brand */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <Link href="/" aria-label="KUMPLY home" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
@@ -93,34 +77,29 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
-          flexWrap: 'wrap', 
-          gap: '1.5rem',
-          paddingTop: '2rem',
-          borderTop: '1px solid var(--border)'
-        }}>
+        <div className="footer-bottom-bar">
           <p style={{ fontSize: '0.85rem', color: 'var(--text-tertiary)' }}>
             {tFooter('rights')}
           </p>
           
-          <div style={{ 
-            fontSize: '0.8rem', 
-            color: 'var(--text-tertiary)', 
-            maxWidth: '600px', 
-            textAlign: 'right',
-            lineHeight: 1.5,
-            padding: '1rem',
-            background: 'var(--bg-primary)',
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--border)'
-          }}>
+          <div className="footer-disclaimer">
             <strong>{tFooter('trademark').split(':')[0]}:</strong> {tFooter('trademark').split(':').slice(1).join(':')}
           </div>
         </div>
       </div>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .site-footer { border-top: 1px solid var(--border); padding: 4rem 0 2rem 0; margin-top: 6rem; background: var(--bg-secondary); position: relative; overflow: hidden; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 4rem; }
+        .footer-bottom-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .footer-disclaimer { font-size: 0.8rem; color: var(--text-tertiary); max-width: 600px; text-align: right; line-height: 1.5; padding: 1rem; background: var(--bg-primary); border-radius: var(--radius-md); border: 1px solid var(--border); }
+        
+        @media (max-width: 768px) {
+          .site-footer { padding: 3rem 0 1.5rem 0; margin-top: 4rem; }
+          .footer-grid { gap: 2rem; margin-bottom: 2rem; }
+          .footer-bottom-bar { flex-direction: column; align-items: flex-start; }
+          .footer-disclaimer { text-align: left; }
+        }
+      ` }} />
     </footer>
   );
 }

@@ -172,14 +172,14 @@ export default function DashboardPage() {
   const isExpired = (expiry: number) => expiry > 0 && expiry < Date.now() / 1000;
 
   return (
-    <div className="container" style={{ paddingTop: "3rem", paddingBottom: "4rem" }}>
+    <div className="container dashboard-container">
       {/* ── Header ── */}
       <div style={{ marginBottom: "2.5rem" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "var(--bg-card)", padding: "0.4rem 1rem", borderRadius: "var(--radius-full)", border: "1px solid var(--border)", marginBottom: "1rem" }}>
           <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "var(--success)", boxShadow: "0 0 10px var(--success)", flexShrink: 0 }}></span>
           <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-secondary)" }}>Fuji Testnet · Live</span>
         </div>
-        <h1 className="page-title" style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>
+        <h1 className="page-title dashboard-title">
           {t("title")}
         </h1>
         <p className="page-description" style={{ marginLeft: 0, textAlign: "left" }}>
@@ -188,7 +188,7 @@ export default function DashboardPage() {
       </div>
 
       {/* ── Stats Row ── */}
-      <div className="grid-4" style={{ gridTemplateColumns: "repeat(4, 1fr)", marginBottom: "1rem" }}>
+      <div className="dashboard-stats-grid">
         <div className="glass-card" style={{ textAlign: "center", padding: "1.5rem" }}>
           <div style={{ fontSize: "2.5rem", fontWeight: 800, color: "var(--accent)", marginBottom: "0.25rem" }}>
             {loading ? "—" : (totalAttestations ?? "—")}
@@ -208,7 +208,7 @@ export default function DashboardPage() {
       </div>
 
       {/* ── Fee Metrics Row ── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1rem", marginBottom: "2rem" }} className="fee-grid">
+      <div className="fee-grid">
         <div className="glass-card" style={{ padding: "1.25rem 1.5rem", display: "flex", alignItems: "center", gap: "1.25rem" }}>
           <div style={{ width: "40px", height: "40px", borderRadius: "var(--radius-md)", background: "rgba(99,102,241,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -237,7 +237,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem", marginBottom: "2rem" }} className="dashboard-grid">
+      <div className="dashboard-grid">
         {/* ── Address Lookup ── */}
         <div className="glass-card" style={{ padding: "1.75rem" }}>
           <h2 style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: "0.4rem" }}>
@@ -247,7 +247,7 @@ export default function DashboardPage() {
             {t("lookupDesc")}
           </p>
 
-          <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1rem" }}>
+          <div className="lookup-form">
             <input
               type="text"
               placeholder="0x..."
@@ -375,13 +375,12 @@ export default function DashboardPage() {
             </div>
           )}
 
-          <div style={{ marginTop: "1.5rem", paddingTop: "1rem", borderTop: "1px solid var(--border)" }}>
+          <div className="dashboard-actions">
             <a
               href={`${EXPLORER}/address/${CONTRACT}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary"
-              style={{ fontSize: "0.8rem", padding: "0.5rem 1rem", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
             >
               {t("viewContract")} ↗
             </a>
@@ -389,7 +388,6 @@ export default function DashboardPage() {
               onClick={fetchDashboardData}
               disabled={loading}
               className="btn btn-secondary"
-              style={{ fontSize: "0.8rem", padding: "0.5rem 1rem", marginLeft: "0.5rem" }}
             >
               {t("refresh")}
             </button>
@@ -465,13 +463,24 @@ export default function DashboardPage() {
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
+        .dashboard-container { padding-top: 3rem; padding-bottom: 4rem; }
+        .dashboard-title { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .dashboard-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1rem; }
+        .fee-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+        .lookup-form { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+        .dashboard-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        .dashboard-actions .btn { font-size: 0.8rem; padding: 0.5rem 1rem; display: inline-flex; align-items: center; gap: 0.4rem; }
+        
         @media (max-width: 768px) {
-          .dashboard-grid { grid-template-columns: 1fr !important; }
-          .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
-          .fee-grid { grid-template-columns: 1fr !important; }
+          .dashboard-grid { grid-template-columns: 1fr; }
+          .fee-grid { grid-template-columns: 1fr; }
+          .dashboard-title { font-size: 2rem; }
         }
         @media (max-width: 480px) {
-          .grid-4 { grid-template-columns: 1fr !important; }
+          .lookup-form { flex-direction: column; }
+          .dashboard-container { padding-top: 1.5rem; padding-bottom: 2.5rem; }
+          .dashboard-title { font-size: 1.75rem; }
         }
       ` }} />
     </div>

@@ -52,7 +52,7 @@ export default function L1Page() {
   const t = useTranslations('L1');
 
   return (
-    <div className="container" style={{ paddingTop: '2rem', paddingBottom: '5rem' }}>
+    <div className="container l1-container">
       {/* ── Header ──────────────────────────────────────────────── */}
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.4rem 1rem', background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.35)', borderRadius: '999px', marginBottom: '1.25rem' }}>
@@ -83,7 +83,7 @@ export default function L1Page() {
       </div>
 
       {/* ── Chain identity ─────────────────────────────────────── */}
-      <div className="grid-2" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', marginBottom: '1.5rem' }}>
+      <div className="l1-grid-2">
         <div className="glass-card" style={{ padding: '2rem' }}>
           <h3 style={{ marginBottom: '1.5rem', color: 'var(--text-primary)', fontSize: '1.05rem' }}>{t('chainIdentity')}</h3>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
@@ -114,7 +114,7 @@ export default function L1Page() {
         <h3 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)', fontSize: '1.05rem' }}>{t('architectureTitle')}</h3>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>{t('architectureDesc')}</p>
 
-        <div className="code-block" style={{ fontFamily: 'monospace', lineHeight: 1.7 }}>
+        <div className="code-block l1-code-diagram">
           <span className="comment">┌─────────────────────────────────────────────────────────────────┐</span><br/>
           <span className="comment">│</span>  <span className="keyword">Validator Set (ACP-77 + ACP-99)</span>                              <span className="comment">│</span><br/>
           <span className="comment">│</span>  KYB-verified institutions only · 5–21 active validators        <span className="comment">│</span><br/>
@@ -192,7 +192,7 @@ export default function L1Page() {
         <h3 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)', fontSize: '1.05rem' }}>{t('whyTitle')}</h3>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>{t('whySubtitle')}</p>
 
-        <div className="grid-2" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
+        <div className="l1-grid-why">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} style={{ padding: '1.25rem', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
               <div style={{ color: 'var(--accent)', fontSize: '0.78rem', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '0.05em' }}>0{i}</div>
@@ -208,7 +208,7 @@ export default function L1Page() {
         <h3 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)', fontSize: '1.05rem' }}>{t('artifactsTitle')}</h3>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>{t('artifactsDesc')}</p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.75rem' }}>
+        <div className="l1-grid-artifacts">
           <StatBlock label="Contract" value="KumplyValidatorSetManager.sol" />
           <StatBlock label="Genesis" value="contracts/l1/genesis.json" />
           <StatBlock label="L1 config" value="contracts/l1/l1-config.json" />
@@ -223,7 +223,7 @@ export default function L1Page() {
         <h3 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)', fontSize: '1.05rem' }}>{t('acpTitle')}</h3>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>{t('acpDesc')}</p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.75rem' }}>
+        <div className="l1-grid-acp">
           {ACP_REFERENCES.map((acp) => (
             <a
               key={acp.id}
@@ -251,6 +251,24 @@ export default function L1Page() {
           ))}
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .l1-container { padding-top: 2rem; padding-bottom: 5rem; }
+        .l1-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+        .l1-code-diagram { font-family: monospace; line-height: 1.7; overflow-x: auto; white-space: pre; }
+        .l1-grid-why { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+        .l1-grid-artifacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; }
+        .l1-grid-acp { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem; }
+        
+        @media (max-width: 768px) {
+          .l1-container { padding-top: 1.5rem; padding-bottom: 3.5rem; }
+          .l1-grid-2, .l1-grid-artifacts { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+          .l1-container { padding-top: 1rem; padding-bottom: 2.5rem; }
+          .l1-grid-why { grid-template-columns: 1fr; }
+        }
+      ` }} />
     </div>
   );
 }

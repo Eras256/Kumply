@@ -151,7 +151,7 @@ export default function VerifyPage() {
   );
 
   return (
-    <div className="container" style={{ paddingTop: "3rem", paddingBottom: "4rem", maxWidth: "720px" }}>
+    <div className="container verify-container">
 
       {/* ── Connect Wallet ── */}
       {step === "connect" && (
@@ -163,7 +163,7 @@ export default function VerifyPage() {
               <path d="M20 9L23 12L20 15" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <h1 className="page-title" style={{ fontSize: "2.25rem", marginBottom: "1rem" }}>{t("pageTitle")}</h1>
+          <h1 className="page-title verify-title-lg">{t("pageTitle")}</h1>
           <p className="page-description" style={{ marginBottom: "2.5rem" }}>{t("pageDesc")}</p>
           <button className="btn btn-primary" style={{ fontSize: "1rem", padding: "0.9rem 2.25rem" }} onClick={() => connect({ connector: injected() })}>
             {t("connectBtn")}
@@ -176,10 +176,10 @@ export default function VerifyPage() {
       {step === "tierSelect" && (
         <div>
           <WalletBar />
-          <h1 className="page-title" style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>{t("tierSelectTitle")}</h1>
+          <h1 className="page-title verify-title">{t("tierSelectTitle")}</h1>
           <p style={{ color: "var(--text-secondary)", marginBottom: "2rem", fontSize: "0.9rem", lineHeight: 1.6 }}>{t("tierSelectDesc")}</p>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1rem", marginBottom: "2rem", paddingTop: "0.75rem" }}>
+          <div className="verify-tier-grid">
             {TIER_OPTIONS.map(({ levelName, tier, recommended, icon }) => {
               const selected = selectedLevel === levelName;
               return (
@@ -243,7 +243,7 @@ export default function VerifyPage() {
         <div>
           <WalletBar />
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.5rem" }}>
-            <h1 className="page-title" style={{ fontSize: "2rem", margin: 0 }}>{t("pageTitle")}</h1>
+            <h1 className="page-title verify-title" style={{ margin: 0 }}>{t("pageTitle")}</h1>
             <button
               onClick={() => { sdkLaunchedRef.current = false; setStep("tierSelect"); }}
               style={{ marginLeft: "auto", fontSize: "0.8rem", color: "var(--text-tertiary)", background: "none", border: "1px solid var(--border)", borderRadius: "var(--radius-sm)", padding: "0.3rem 0.75rem", cursor: "pointer" }}
@@ -260,7 +260,7 @@ export default function VerifyPage() {
 
           <p style={{ color: "var(--text-secondary)", marginBottom: "1.5rem", fontSize: "0.9rem", lineHeight: 1.6 }}>{t("kycExplainer")}</p>
 
-          <div id="sumsub-container" ref={sumsubContainerRef} style={{ minHeight: "420px", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", background: "var(--bg-card)", overflow: "hidden", marginBottom: "1.5rem" }} />
+          <div id="sumsub-container" ref={sumsubContainerRef} className="verify-sumsub-box" />
 
           {!sdkLaunchedRef.current && (
             <div style={{ textAlign: "center" }}>
@@ -286,7 +286,7 @@ export default function VerifyPage() {
               <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round"/>
             </svg>
           </div>
-          <h2 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "1rem", color: "var(--text-primary)" }}>{t("pendingTitle")}</h2>
+          <h2 className="verify-subtitle">{t("pendingTitle")}</h2>
           <p style={{ color: "var(--text-secondary)", lineHeight: 1.7, maxWidth: "420px", margin: "0 auto 2.5rem" }}>{t("pendingDesc")}</p>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <div style={{ width: "40px", height: "40px", border: "3px solid var(--accent)", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
@@ -304,7 +304,7 @@ export default function VerifyPage() {
               <circle cx="12" cy="12" r="9" stroke="var(--success)" strokeWidth="2"/>
             </svg>
           </div>
-          <h1 className="page-title" style={{ fontSize: "2rem", color: "var(--success)", marginBottom: "0.5rem" }}>{t("doneTitle")}</h1>
+          <h1 className="page-title verify-title" style={{ color: "var(--success)" }}>{t("doneTitle")}</h1>
           <p style={{ color: "var(--text-secondary)", marginBottom: "2.5rem" }}>{t("doneDesc")}</p>
 
           <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "1.75rem", maxWidth: "420px", margin: "0 auto 2rem", textAlign: "left" }}>
@@ -338,13 +338,34 @@ export default function VerifyPage() {
               <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="var(--error)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <h2 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "1rem", color: "var(--text-primary)" }}>{t("errorTitle")}</h2>
+          <h2 className="verify-subtitle">{t("errorTitle")}</h2>
           <p style={{ color: "var(--text-secondary)", marginBottom: "2.5rem", lineHeight: 1.7, maxWidth: "400px", margin: "0 auto 2.5rem" }}>{error}</p>
           <button className="btn btn-secondary" onClick={() => { setStep("tierSelect"); sdkLaunchedRef.current = false; setError(null); }}>
             {t("tryAgainBtn")}
           </button>
         </div>
       )}
+      <style dangerouslySetInnerHTML={{ __html: `
+        .verify-container { padding-top: 3rem; padding-bottom: 4rem; max-width: 720px; margin: 0 auto; }
+        .verify-title-lg { font-size: 2.25rem; margin-bottom: 1rem; }
+        .verify-title { font-size: 2rem; margin-bottom: 0.5rem; }
+        .verify-subtitle { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary); }
+        .verify-tier-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; padding-top: 0.75rem; }
+        .verify-sumsub-box { min-height: 420px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-card); overflow: hidden; margin-bottom: 1.5rem; }
+        
+        @media (max-width: 768px) {
+          .verify-container { padding-top: 2rem; padding-bottom: 3rem; }
+          .verify-title-lg { font-size: 2rem; }
+          .verify-title { font-size: 1.75rem; }
+        }
+        @media (max-width: 480px) {
+          .verify-container { padding-top: 1.5rem; padding-bottom: 2rem; }
+          .verify-title-lg { font-size: 1.75rem; }
+          .verify-title { font-size: 1.5rem; }
+          .verify-subtitle { font-size: 1.25rem; }
+          .verify-tier-grid { grid-template-columns: 1fr; }
+        }
+      ` }} />
     </div>
   );
 }

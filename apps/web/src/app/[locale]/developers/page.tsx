@@ -29,7 +29,7 @@ export default function DevelopersPage() {
   const t  = useTranslations('Developers');
 
   return (
-    <div className="container" style={{ paddingTop: '2rem', paddingBottom: '5rem' }}>
+    <div className="container dev-container">
       <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
         <h1 className="section-title">{t('title')}</h1>
         <p className="section-subtitle" style={{ margin: '0 auto' }}>{t('subtitle')}</p>
@@ -60,12 +60,12 @@ export default function DevelopersPage() {
             </a>
           </div>
         </div>
-        <div className="code-block" style={{ marginBottom: '2rem' }}>
+        <div className="code-block dev-code-block" style={{ marginBottom: '2rem' }}>
           pnpm add @kumply/sdk
         </div>
 
         <h3 style={{ marginBottom: '1rem', color: 'var(--text-primary)', fontSize: '1.05rem' }}>{t('step2')}</h3>
-        <div className="code-block">
+        <div className="code-block dev-code-block">
           <span className="keyword">import</span> {'{'} <span className="function">KumplyClient</span> {'}'} <span className="keyword">from</span> <span className="string">'@kumply/sdk'</span>;<br/><br/>
 
           <span className="keyword">const</span> client = <span className="keyword">new</span> <span className="function">KumplyClient</span>({'{'}<br/>
@@ -106,7 +106,7 @@ export default function DevelopersPage() {
       <div className="glass-card" style={{ padding: '2.5rem', marginBottom: '1.5rem' }}>
         <h3 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)', fontSize: '1.05rem' }}>{t('solidityTitle')}</h3>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>{t('soliditySubtitle')}</p>
-        <div className="code-block">
+        <div className="code-block dev-code-block">
           <span className="comment">// SPDX-License-Identifier: MIT</span><br/>
           <span className="keyword">pragma solidity</span> ^<span className="number">0.8</span>.<span className="number">28</span>;<br/><br/>
 
@@ -137,7 +137,7 @@ export default function DevelopersPage() {
       </div>
 
       {/* Resources */}
-      <div className="grid-2" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+      <div className="dev-grid-resources">
         <a
           href="https://www.npmjs.com/package/@kumply/sdk"
           target="_blank"
@@ -202,6 +202,19 @@ export default function DevelopersPage() {
           </div>
         </a>
       </div>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .dev-container { padding-top: 2rem; padding-bottom: 5rem; }
+        .dev-code-block { overflow-x: auto; white-space: pre; }
+        .dev-grid-resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        
+        @media (max-width: 768px) {
+          .dev-container { padding-top: 1.5rem; padding-bottom: 3.5rem; }
+          .dev-grid-resources { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+          .dev-container { padding-top: 1rem; padding-bottom: 2.5rem; }
+        }
+      ` }} />
     </div>
   );
 }
