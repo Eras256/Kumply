@@ -23,7 +23,7 @@ const kumplyL1 = {
   testnet: true,
 };
 
-const projectId = "299ad4e99fab1b67cb95953e76fa45b6";
+const projectId = process.env.NEXT_PUBLIC_REOWN_PROJECT_ID || "299ad4e99fab1b67cb95953e76fa45b6";
 
 const metadata = {
   name: "KUMPLY",
