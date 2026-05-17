@@ -14,6 +14,11 @@ export function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
 
+  const switchLocale = (newLocale: string) => {
+    const search = window.location.search;
+    window.location.href = `/${newLocale}${pathname === '/' ? '' : pathname}${search}`;
+  };
+
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const { open } = useAppKit();
@@ -104,11 +109,11 @@ export function Navbar() {
             {/* LANGUAGE SWITCHER */}
             <div className="navbar__lang">
               <button
-                onClick={() => router.replace(pathname, { locale: 'en' })}
+                onClick={() => switchLocale('en')}
                 className={`navbar__lang-btn ${locale === 'en' ? 'navbar__lang-btn--active' : ''}`}
               >EN</button>
               <button
-                onClick={() => router.replace(pathname, { locale: 'es' })}
+                onClick={() => switchLocale('es')}
                 className={`navbar__lang-btn ${locale === 'es' ? 'navbar__lang-btn--active' : ''}`}
               >ES</button>
             </div>
@@ -143,11 +148,11 @@ export function Navbar() {
           <div className="navbar__mobile-actions">
             <div className="navbar__lang navbar__mobile-toplang">
               <button
-                onClick={() => router.replace(pathname, { locale: 'en' })}
+                onClick={() => switchLocale('en')}
                 className={`navbar__lang-btn ${locale === 'en' ? 'navbar__lang-btn--active' : ''}`}
               >EN</button>
               <button
-                onClick={() => router.replace(pathname, { locale: 'es' })}
+                onClick={() => switchLocale('es')}
                 className={`navbar__lang-btn ${locale === 'es' ? 'navbar__lang-btn--active' : ''}`}
               >ES</button>
             </div>
@@ -210,11 +215,11 @@ export function Navbar() {
           {/* MOBILE LANGUAGE SWITCHER */}
           <div className="navbar__mobile-lang">
             <button
-              onClick={() => { router.replace(pathname, { locale: 'en' }); closeMenu(); }}
+              onClick={() => { switchLocale('en'); closeMenu(); }}
               className={`navbar__lang-btn navbar__lang-btn--lg ${locale === 'en' ? 'navbar__lang-btn--active' : ''}`}
             >EN</button>
             <button
-              onClick={() => { router.replace(pathname, { locale: 'es' }); closeMenu(); }}
+              onClick={() => { switchLocale('es'); closeMenu(); }}
               className={`navbar__lang-btn navbar__lang-btn--lg ${locale === 'es' ? 'navbar__lang-btn--active' : ''}`}
             >ES</button>
           </div>
