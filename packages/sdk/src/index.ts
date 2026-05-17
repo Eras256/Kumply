@@ -4,6 +4,10 @@ export type {
   Attestation,
   TierConfig,
   KumplyClientOptions,
+  KumplyNetwork,
+  NetworkConfig,
+  L1Validator,
+  L1ValidatorSet,
 } from "./types";
 export {
   ATTESTATION_STORE_ABI,
@@ -12,6 +16,7 @@ export {
 export {
   FUJI_CONFIG,
   MAINNET_CONFIG,
+  KUMPLY_L1_CONFIG,
   TIER_DEFINITIONS,
   AVAX_DECIMALS,
 } from "./constants";

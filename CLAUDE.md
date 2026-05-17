@@ -2,7 +2,7 @@
 
 # KUMPLY — Instrucciones Técnicas para AI
 
-> Última actualización: 15 Mayo 2026 — 107 tests passing (60 contracts + 30 SDK + 17 API)
+> Última actualización: 17 Mayo 2026 — 134 tests passing (87 contracts + 30 SDK + 17 API). KUMPLY Compliance L1 (Deploy-Ready) agregado: `KumplyValidatorSetManager.sol` + génesis + scripts Avalanche CLI. Ver [`L1.md`](./L1.md).
 
 ---
 
@@ -12,14 +12,24 @@
 kumply/                          # Root (pnpm workspaces)
 ├── contracts/                   # @kumply/contracts — Solidity 0.8.28 + Hardhat
 │   ├── contracts/
-│   │   ├── AttestationStore.sol  # Core: KYC attestations (5 tiers, Pausable, AccessControl)
-│   │   └── ComplianceGate.sol    # Gatekeeper: enforce min tier for on-chain actions
+│   │   ├── AttestationStore.sol            # Core: KYC attestations (5 tiers, Pausable, AccessControl)
+│   │   ├── ComplianceGate.sol              # Gatekeeper: enforce min tier for on-chain actions
+│   │   └── KumplyValidatorSetManager.sol   # ACP-99 ValidatorSetManager with KYB gating (L1)
+│   ├── l1/                                  # KUMPLY Compliance L1 (Deploy-Ready)
+│   │   ├── genesis.json                     # Subnet-EVM genesis (chainId 43210, KMP gas)
+│   │   ├── l1-config.json                   # ACP-77 L1 config + compliance hooks
+│   │   ├── subnet-config.json               # Per-chain AvalancheGo runtime config
+│   │   └── README.md                        # L1 deployment overview
 │   ├── scripts/
-│   │   ├── deploy.ts             # Deploy AttestationStore + ComplianceGate to Fuji
-│   │   ├── seed-fuji.ts          # Seed demo attestations for hackathon
-│   │   └── verify-contracts.ts   # Verify on Snowtrace/Routescan
+│   │   ├── deploy.ts                        # Deploy AttestationStore + ComplianceGate to Fuji
+│   │   ├── deploy-l1.sh                     # Avalanche CLI script (one-shot L1 deploy)
+│   │   ├── deploy-validator-manager.ts      # Hardhat: deploy KumplyValidatorSetManager
+│   │   ├── seed-fuji.ts                     # Seed demo attestations for hackathon
+│   │   └── verify-contracts.ts              # Verify on Snowtrace/Routescan
 │   └── test/
-│       └── AttestationStore.test.ts  # 40 Hardhat tests
+│       ├── AttestationStore.test.ts         # 40 Hardhat tests
+│       ├── ComplianceGate.test.ts           # ComplianceGate tests
+│       └── KumplyValidatorSetManager.test.ts # 27 tests (L1 validator set + KYB gate)
 ├── packages/
 │   └── sdk/                     # @kumply/sdk — TypeScript SDK (viem-based)
 │       ├── src/
@@ -44,6 +54,7 @@ kumply/                          # Root (pnpm workspaces)
 │       │   │   ├── demo/           # Live demo (ComplianceGate check)
 │       │   │   ├── dashboard/      # On-chain attestation explorer
 │       │   │   ├── network/        # Fuji network status + contracts
+│       │   │   ├── l1/             # KUMPLY Compliance L1 page (Deploy-Ready)
 │       │   │   ├── tiers/          # Tier descriptions
 │       │   │   ├── developers/     # SDK docs
 │       │   │   ├── solutions/      # Use cases

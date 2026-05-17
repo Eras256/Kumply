@@ -17,6 +17,25 @@ export const MAINNET_CONFIG: NetworkConfig = {
   rpcUrl: "https://api.avax.network/ext/bc/C/rpc",
   name: "Avalanche Mainnet",
   explorerUrl: "https://snowtrace.io",
+  live: true,
+  symbol: "AVAX",
+};
+
+/**
+ * KUMPLY Compliance L1 — Deploy-Ready (not yet live).
+ *
+ * Custom Avalanche L1 where only KYB-verified institutions (Bankaool, Arkangeles, ...)
+ * can validate. Built per ACP-77 (Reinventing Subnets) and ACP-99 (ValidatorSetManager).
+ * See {@link https://build.avax.network/docs/acps/77-reinventing-subnets ACP-77}
+ * and {@link https://build.avax.network/docs/acps/99-validatorsetmanager-contract ACP-99}.
+ */
+export const KUMPLY_L1_CONFIG: NetworkConfig = {
+  chainId: 43210,
+  rpcUrl: "https://kumply-l1.rpc.kumply.io/ext/bc/{blockchainID}/rpc",
+  name: "KUMPLY Compliance L1",
+  explorerUrl: "https://kumply-l1.subnets.avax.network",
+  live: false,
+  symbol: "KMP",
 };
 
 /** KYC tier definitions matching the smart contract */

@@ -1,4 +1,4 @@
-import { createPublicClient, http, type PublicClient, type Chain } from "viem";
+import { createPublicClient, http, defineChain, type PublicClient, type Chain } from "viem";
 import { avalancheFuji, avalanche } from "viem/chains";
 import type {
   AttestationResult,
@@ -7,7 +7,25 @@ import type {
   KumplyClientOptions,
 } from "./types";
 import { ATTESTATION_STORE_ABI } from "./contracts";
-import { FUJI_CONFIG, MAINNET_CONFIG, TIER_DEFINITIONS } from "./constants";
+import { FUJI_CONFIG, MAINNET_CONFIG, KUMPLY_L1_CONFIG, TIER_DEFINITIONS } from "./constants";
+
+/**
+ * Viem chain definition for the KUMPLY Compliance L1 (Deploy-Ready).
+ * Resolved from {@link KUMPLY_L1_CONFIG} at runtime.
+ */
+const kumplyL1Chain: Chain = defineChain({
+  id: KUMPLY_L1_CONFIG.chainId,
+  name: KUMPLY_L1_CONFIG.name,
+  nativeCurrency: { name: "KMP", symbol: "KMP", decimals: 18 },
+  rpcUrls: {
+    default: { http: [KUMPLY_L1_CONFIG.rpcUrl] },
+    public: { http: [KUMPLY_L1_CONFIG.rpcUrl] },
+  },
+  blockExplorers: {
+    default: { name: "KUMPLY Explorer", url: KUMPLY_L1_CONFIG.explorerUrl },
+  },
+  testnet: false,
+});
 
 /**
  * KumplyClient — Main SDK entry point for interacting with KUMPLY smart contracts.
@@ -27,8 +45,24 @@ export class KumplyClient {
   private chain: Chain;
 
   constructor(options: KumplyClientOptions) {
-    const config = options.network === "mainnet" ? MAINNET_CONFIG : FUJI_CONFIG;
-    this.chain = options.network === "mainnet" ? avalanche : avalancheFuji;
+    let config;
+    if (options.network === "mainnet") {
+      config = MAINNET_CONFIG;
+      this.chain = avalanche;
+    } else if (options.network === "kumply-l1") {
+      config = KUMPLY_L1_CONFIG;
+      this.chain = kumplyL1Chain;
+      if (!config.live) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          "[@kumply/sdk] KUMPLY Compliance L1 is Deploy-Ready but not yet live. " +
+            "Calls will fail until the L1 is bootstrapped. See https://kumply.io/l1 for status."
+        );
+      }
+    } else {
+      config = FUJI_CONFIG;
+      this.chain = avalancheFuji;
+    }
 
     this.publicClient = createPublicClient({
       chain: this.chain,

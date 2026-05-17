@@ -1,0 +1,63 @@
+{
+  "_comment": "KUMPLY Compliance L1 — Avalanche L1 (Subnet-EVM) chain config — see https://build.avax.network/docs/nodes/chain-configs/avalanche-l1s/avalanche-l1-configs",
+  "name": "KUMPLY Compliance L1",
+  "symbol": "KMP",
+  "chainID": 43210,
+  "vm": "subnet-evm",
+  "vmVersion": "v0.7.0",
+  "subnetEVMVersion": "v0.7.0",
+  "rpcEndpoint": "https://kumply-l1.rpc.kumply.io/ext/bc/{blockchainID}/rpc",
+  "wsEndpoint": "wss://kumply-l1.rpc.kumply.io/ext/bc/{blockchainID}/ws",
+  "explorerUrl": "https://kumply-l1.subnets.avax.network",
+  "consensus": {
+    "_comment": "Snowman consensus parameters tuned for institutional-grade finality",
+    "k": 20,
+    "alphaPreference": 15,
+    "alphaConfidence": 15,
+    "betaVirtuous": 15,
+    "betaRogue": 20,
+    "concurrentRepolls": 4,
+    "optimalProcessing": 50,
+    "maxOutstandingItems": 1024,
+    "maxItemProcessingTime": "30s"
+  },
+  "stateSyncEnabled": true,
+  "offlinePruning": false,
+  "validatorSet": {
+    "_comment": "ACP-77 PoA validator set with off-chain governance via KumplyValidatorSetManager. KYB (Tier 4) required.",
+    "managerContract": "{KUMPLY_VALIDATOR_SET_MANAGER_ADDRESS}",
+    "managerChain": "C",
+    "minValidators": 5,
+    "targetValidators": 21,
+    "maxValidators": 100,
+    "requiredKYCTier": 4,
+    "validatorChurnPeriod": "24h",
+    "maxChurnPerPeriod": 20
+  },
+  "fees": {
+    "_comment": "Native gas token KMP. Initial fees set low; ACP-83 dynamic multidim fees enabled post-launch.",
+    "gasToken": "KMP",
+    "gasLimit": 15000000,
+    "targetBlockRate": 2,
+    "minBaseFee": "1 gwei",
+    "dynamicFees": "ACP-83 (deferred until 1 month post-launch)"
+  },
+  "interchain": {
+    "_comment": "Avalanche Warp Messaging (AWM) + Interchain Token Transfer (ICTT) — required for cross-L1 attestation propagation",
+    "warpEnabled": true,
+    "icmEnabled": true,
+    "trustedRelayers": [],
+    "icttEnabled": false,
+    "_note": "ICTT enables future KMP <-> AVAX bridging once the L1 is in production"
+  },
+  "compliance": {
+    "_comment": "KUMPLY-specific extensions — institutional compliance hooks",
+    "attestationStoreAddress": "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76",
+    "attestationStoreChain": "C",
+    "validatorSetManager": "{KUMPLY_VALIDATOR_SET_MANAGER_ADDRESS}",
+    "complianceGateBuiltin": true,
+    "minimumTierForValidation": 4,
+    "minimumTierForTransacting": 0,
+    "minimumTierForDeploying": 4
+  }
+}

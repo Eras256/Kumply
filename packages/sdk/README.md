@@ -109,10 +109,13 @@ import {
 
 ## Networks
 
-| Network           | Chain ID | Explorer                     |
-|-------------------|----------|------------------------------|
-| Avalanche Fuji    | 43113    | https://testnet.snowtrace.io |
-| Avalanche C-Chain | 43114    | https://snowtrace.io         |
+| Network                  | Network ID    | Chain ID | Status        | Explorer                              |
+|--------------------------|---------------|----------|---------------|---------------------------------------|
+| Avalanche Fuji           | `fuji`        | 43113    | **Live**      | https://testnet.snowtrace.io          |
+| Avalanche C-Chain        | `mainnet`     | 43114    | Live          | https://snowtrace.io                  |
+| KUMPLY Compliance L1     | `kumply-l1`   | 43210    | Deploy-Ready  | https://kumply-l1.subnets.avax.network |
+
+The **KUMPLY Compliance L1** is a custom Avalanche L1 (ACP-77 + ACP-99) where only KYB-verified institutions can validate. The contract, genesis, and deploy scripts are committed and tested — pending institutional validator commitments before going live. See [`L1.md`](https://github.com/KumplyProtocol/kumply/blob/main/L1.md) for the architectural rationale.
 
 ## Using ABIs directly with viem
 

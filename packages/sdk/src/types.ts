@@ -24,9 +24,12 @@ export interface TierConfig {
   requiredChecks: string[];
 }
 
+/** Supported networks. `kumply-l1` is the dedicated Compliance L1 (Deploy-Ready, not yet live). */
+export type KumplyNetwork = "fuji" | "mainnet" | "kumply-l1";
+
 /** Options for creating a KumplyClient instance */
 export interface KumplyClientOptions {
-  network: "fuji" | "mainnet";
+  network: KumplyNetwork;
   rpcUrl?: string;
   contractAddress: string;
 }
@@ -37,4 +40,26 @@ export interface NetworkConfig {
   rpcUrl: string;
   name: string;
   explorerUrl: string;
+  /** Whether the network is live and accepting transactions. False for Deploy-Ready networks. */
+  live?: boolean;
+  /** Native gas token symbol. */
+  symbol?: string;
+}
+
+/** Validator record for the KUMPLY Compliance L1 (ACP-99 ValidatorSetManager) */
+export interface L1Validator {
+  nodeID: string;
+  owner: string;
+  weight: bigint;
+  registeredAt: number;
+  expiresAt: number;
+  active: boolean;
+}
+
+/** Snapshot of the KUMPLY L1 validator set */
+export interface L1ValidatorSet {
+  totalWeight: bigint;
+  activeCount: number;
+  epochChurn: number;
+  epochStart: number;
 }

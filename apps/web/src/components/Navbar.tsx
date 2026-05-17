@@ -66,6 +66,7 @@ export function Navbar() {
     { href: "/tiers" as const, label: t('tiers') },
     { href: "/demo" as const, label: t('demo') },
     { href: "/dashboard" as const, label: t('dashboard') },
+    { href: "/l1" as const, label: t('l1') },
     { href: "/developers" as const, label: t('developers') },
   ];
 
