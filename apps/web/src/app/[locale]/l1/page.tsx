@@ -38,11 +38,15 @@ function StatBlock({ label, value, accent }: { label: string; value: string; acc
   );
 }
 
-function Row({ label, value, mono = true }: { label: string; value: string; mono?: boolean }) {
+function Row({ label, value, mono = true, href }: { label: string; value: string; mono?: boolean; href?: string }) {
   return (
     <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '0.85rem 0', borderBottom: '1px solid var(--border)', gap: '1rem' }}>
       <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', flexShrink: 0 }}>{label}</span>
-      {mono ? (
+      {href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-word', overflowWrap: 'anywhere', textAlign: 'right', textDecoration: 'underline' }}>
+          {value} ↗
+        </a>
+      ) : mono ? (
         <code style={{ color: 'var(--text-primary)', fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-word', overflowWrap: 'anywhere', textAlign: 'right' }}>{value}</code>
       ) : (
         <span style={{ color: 'var(--text-primary)', fontSize: '0.9rem', textAlign: 'right', wordBreak: 'break-word', overflowWrap: 'anywhere' }}>{value}</span>
@@ -92,8 +96,8 @@ export default function L1Page() {
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             <Row label={t('chainName')} value={L1_NAME} mono={false} />
             <Row label="Chain ID" value={String(L1_CHAIN_ID)} />
-            <Row label="Subnet ID" value={SUBNET_ID} />
-            <Row label="Blockchain ID" value={BLOCKCHAIN_ID} />
+            <Row label="Subnet ID" value={SUBNET_ID} href={`https://subnets-test.avax.network/subnets/${SUBNET_ID}`} />
+            <Row label="Blockchain ID" value={BLOCKCHAIN_ID} href={`https://subnets-test.avax.network/blockchain/${BLOCKCHAIN_ID}`} />
             <Row label={t('gasToken')} value={L1_SYMBOL} />
             <Row label="VM" value={L1_VM} />
             <Row label={t('blockTime')} value={L1_BLOCK_TIME} />
