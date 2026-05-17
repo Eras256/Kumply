@@ -63,6 +63,8 @@ export function Footer() {
             <Link href="/developers" style={linkStyle}>TypeScript SDK</Link>
             <Link href="/developers/contracts" style={linkStyle}>{tDev('contracts.title')}</Link>
             <Link href="/developers/api" style={linkStyle}>{tDev('api.title')}</Link>
+            <Link href="/l1" style={linkStyle}>{tFooter('l1') || 'Compliance L1'}</Link>
+            <Link href="/docs" style={linkStyle}>{tFooter('docs') || 'Docs'}</Link>
 
           </nav>
 

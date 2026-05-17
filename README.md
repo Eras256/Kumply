@@ -42,6 +42,14 @@ KUMPLY is built entirely around the Avalanche technical stack (May 2026 standard
 - **Avalanche L1 Interoperability**: Through Interchain Messaging (ICM), a credential minted on the C-Chain can be queried seamlessly from any customized Avalanche L1 (formerly Subnets), enabling cross-chain compliance out-of-the-box.
 - **Software-Only Protocol**: We never store user documents. Data is processed securely by Sumsub, while Kumply exclusively handles the cryptographic on-chain proofs.
 
+## ⛓️ KUMPLY Compliance L1 (Deploy-Ready)
+
+We are introducing the first Avalanche L1 where only **KYB-verified institutions can validate**. Every block is signed by a licensed entity, baking compliance directly into the consensus layer.
+- **Validator Architecture (ACP-77 + ACP-99)**: Uses `KumplyValidatorSetManager.sol` to enforce Tier 4 (KYB) attestation as a prerequisite for validation.
+- **Sub-Cent Compliance Reads**: Predictable, near-zero fees for compliance lookups at institutional scale.
+- **Cross-L1 via Warp + ICM**: Attestations propagate natively without bridges or third-party trust assumptions.
+- **Self-Healing Validator Set**: Anyone can call `disableExpiredValidator()` if a validator's KYB expires, removing non-compliant validators automatically without admin intervention.
+
 ## 💻 Tech Stack
 
 - **Smart Contracts**: Solidity 0.8.28, Hardhat, OpenZeppelin
