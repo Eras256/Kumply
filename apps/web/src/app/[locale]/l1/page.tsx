@@ -6,7 +6,7 @@ const L1_NAME             = "KUMPLY Compliance L1";
 const L1_SYMBOL           = "KMP";
 const L1_VM               = "Subnet-EVM v0.7.0";
 const L1_BLOCK_TIME       = "2s";
-const L1_RPC_PLACEHOLDER  = "https://kumply-l1.rpc.kumply.io/ext/bc/{blockchainID}/rpc";
+const L1_RPC_PLACEHOLDER  = "https://kumply-l1.rpc.kumply.xyz/ext/bc/{blockchainID}/rpc";
 const L1_EXPLORER         = "https://kumply-l1.subnets.avax.network";
 const ATTESTATION_STORE   = process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76";
 

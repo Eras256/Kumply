@@ -56,7 +56,7 @@ export class KumplyClient {
         // eslint-disable-next-line no-console
         console.warn(
           "[@kumply/sdk] KUMPLY Compliance L1 is Deploy-Ready but not yet live. " +
-            "Calls will fail until the L1 is bootstrapped. See https://kumply.io/l1 for status."
+            "Calls will fail until the L1 is bootstrapped. See https://kumply.xyz/l1 for status."
         );
       }
     } else {

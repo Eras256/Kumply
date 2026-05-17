@@ -11,7 +11,7 @@
 | **Stage** | Fuji testnet deployed · mainnet Q4 2026 |
 | **Tests passing** | 157 (110 contracts · 30 SDK · 17 API) |
 | **Repo** | https://github.com/Eras256/Kumply |
-| **Live** | https://kumply.io (institutional landing + KYC flow) |
+| **Live** | https://kumply.xyz (institutional landing + KYC flow) |
 
 ---
 
@@ -214,14 +214,14 @@ Four structural moats:
 
 | | |
 |---|---|
-| **Live demo** | https://kumply.io/verify |
+| **Live demo** | https://kumply.xyz/verify |
 | **Repository** | https://github.com/Eras256/Kumply |
 | **Snowtrace AttestationStore** | https://testnet.snowtrace.io/address/[set by deploy] |
 | **Snowtrace ComplianceGate** | https://testnet.snowtrace.io/address/[set by deploy] |
 | **Snowtrace ValidatorSetManager** | https://testnet.snowtrace.io/address/[set post-L1-deploy] |
 | **Tests CI status** | 157 passing, 4 parallel jobs, 100% green |
 | **Twitter / X** | @kumply_xyz |
-| **Contact** | hello@kumply.io |
+| **Contact** | hello@kumply.xyz |
 
 ---
 

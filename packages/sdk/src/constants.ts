@@ -31,7 +31,7 @@ export const MAINNET_CONFIG: NetworkConfig = {
  */
 export const KUMPLY_L1_CONFIG: NetworkConfig = {
   chainId: 43210,
-  rpcUrl: "https://kumply-l1.rpc.kumply.io/ext/bc/{blockchainID}/rpc",
+  rpcUrl: "https://kumply-l1.rpc.kumply.xyz/ext/bc/{blockchainID}/rpc",
   name: "KUMPLY Compliance L1",
   explorerUrl: "https://kumply-l1.subnets.avax.network",
   live: false,

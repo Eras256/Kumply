@@ -6,6 +6,7 @@
     "demo": "Live Demo",
     "dashboard": "Dashboard",
     "developers": "Developers",
+    "docs": "Docs",
     "network": "Fuji Network",
     "l1": "L1",
     "verify": "Get Verified",
@@ -358,5 +359,151 @@
     "checkBtn": "Check",
     "solidityTitle": "Add Compliance in 3 Lines of Solidity",
     "solidityDesc": "Copy this pattern into your contract. Replace the constructor arguments with the live KUMPLY addresses."
+  },
+  "Docs": {
+    "title": "Documentation",
+    "subtitle": "Everything you need to integrate KUMPLY — smart contracts, SDK, REST API, the Compliance L1, and the KYA Tier-5 primitive.",
+    "badges": {
+      "network": "Avalanche Fuji",
+      "tests": "157 tests passing"
+    },
+    "toc": {
+      "heading": "Contents",
+      "overview": "Overview",
+      "quickstart": "Quickstart",
+      "contracts": "Smart Contracts",
+      "sdk": "SDK Reference",
+      "api": "REST API",
+      "l1": "KUMPLY L1",
+      "kya": "KYA Tier 5",
+      "tiers": "5-Tier Spectrum",
+      "architecture": "Architecture",
+      "resources": "Resources"
+    },
+    "cta": {
+      "github": "View on GitHub",
+      "litepaper": "Read litepaper"
+    },
+    "overview": {
+      "title": "What KUMPLY is",
+      "subtitle": "Two-layer compliance primitive: on-chain attestations on C-Chain (live) + a dedicated KYB-gated Avalanche L1. All five tiers (KYC, KYB, KYA) compose with any DApp via the ComplianceGate contract.",
+      "cardA": {
+        "label": "Stack",
+        "value": "Solidity 0.8.28 · viem · Next.js 16 · Subnet-EVM v0.8.0"
+      },
+      "cardB": {
+        "label": "Standards",
+        "value": "ACP-30 · ACP-77 · ACP-99 · ACP-103 (roadmap)"
+      },
+      "cardC": {
+        "label": "License",
+        "value": "MIT — open source, no proprietary lock-in"
+      }
+    },
+    "quickstart": {
+      "title": "Quickstart",
+      "subtitle": "Install the SDK and verify any address's tier in under a minute. Production-ready against Fuji today.",
+      "installTitle": "1. Install",
+      "verifyTitle": "2. Verify a counterparty",
+      "gateTitle": "3. Gate your DApp by tier"
+    },
+    "contracts": {
+      "title": "Smart Contracts",
+      "subtitle": "All KUMPLY contracts are deployed and verified on Avalanche Fuji. Each is open-source, audited internally, and documented with NatSpec.",
+      "methodsLabel": "Key methods"
+    },
+    "sdk": {
+      "title": "SDK Reference",
+      "subtitle": "TypeScript-first, built on viem. Tree-shakable, zero runtime dependencies beyond viem.",
+      "note": "Full API reference and type definitions live in the @kumply/sdk package. All reads are gas-free; writes require a verifier role."
+    },
+    "api": {
+      "title": "REST API",
+      "subtitle": "Express + TypeScript backend that proxies Sumsub and bridges KYC results to on-chain attestations via HMAC-verified webhooks.",
+      "health": "Health probe for load balancers.",
+      "token": "Generate a Sumsub access token for the WebSDK. API-key protected.",
+      "webhook": "Sumsub webhook receiver. HMAC-SHA256 verified, idempotent.",
+      "attestation": "Look up the on-chain attestation for any address.",
+      "fee": "Current per-call pay-per-use fee in wei (AVAX).",
+      "note": "OpenAPI 3.0 spec:"
+    },
+    "l1": {
+      "title": "KUMPLY Compliance L1",
+      "subtitle": "Dedicated Avalanche L1 (Subnet-EVM), KYB-gated at the security layer, open to all 5 tiers as users.",
+      "tokenLabel": "Token (KMP)",
+      "rolesTitle": "Who can do what on the L1",
+      "role1": "Validators (block producers): Tier 4 (KYB) required — banks, fintechs, regulated entities.",
+      "role2": "Contract deployers: Tier 4 (KYB) required — accountable, audited code only.",
+      "role3": "Transactors (gas payers): any tier 0-5 — retail, institutional, and autonomous agents all welcome.",
+      "role4": "Attestation readers: open and free — verification is public infrastructure."
+    },
+    "kya": {
+      "title": "KYA — Know Your Agent (Tier 5)",
+      "subtitle": "The unique KUMPLY primitive for autonomous AI agents. As agentic DeFi grows in 2026, every protocol needs a way to distinguish trusted, bounded agents from anonymous scripts. No other Avalanche L1 — and to our knowledge no other EVM L1 — ships this.",
+      "f1": {
+        "label": "Model fingerprint",
+        "value": "Hash of model weights (open) or pinned API endpoint + version (closed)."
+      },
+      "f2": {
+        "label": "Owner attestation",
+        "value": "EVM address of a Tier-4 (KYB) human or institution that takes legal responsibility."
+      },
+      "f3": {
+        "label": "Behavior bounds",
+        "value": "Max tx/day, max value/tx, contract allowlist, allowed assets, time windows."
+      },
+      "f4": {
+        "label": "Provenance",
+        "value": "Training data jurisdiction, ToS hash, behavior policy URI, IPFS-pinned."
+      },
+      "f5": {
+        "label": "Liveness oracle",
+        "value": "Heartbeat from the agent's runtime — proves it's still operating and reachable."
+      },
+      "roadmapLabel": "Status",
+      "roadmap": "Tier 5 already lives in AttestationStore.sol; full AgentRegistry.sol with the 5 fields above ships Q3 2026 alongside the first agentic-DeFi pilot DApp."
+    },
+    "tiers": {
+      "title": "5-Tier Compliance Spectrum",
+      "subtitle": "Each tier maps to a real-world verification depth and unlocks different on-chain actions.",
+      "tierOne": {
+        "name": "Basic KYC",
+        "use": "Wallet onboarding, low-risk DeFi, P2P payments under threshold."
+      },
+      "tierTwo": {
+        "name": "Standard KYC",
+        "use": "Stablecoin payments, P2P transfers, mid-volume DeFi."
+      },
+      "tierThree": {
+        "name": "Enhanced KYC",
+        "use": "Lending, derivatives, tokenized real-world assets."
+      },
+      "tierFour": {
+        "name": "Business / KYB",
+        "use": "Institutional accounts, validators, contract deployers, qualified pools."
+      },
+      "tierFive": {
+        "name": "Agent / KYA",
+        "use": "Autonomous AI agents and bots — unique to KUMPLY."
+      }
+    },
+    "architecture": {
+      "title": "Architecture",
+      "subtitle": "Full system diagrams (Mermaid, GitHub-rendered) plus deep dives into the ACP-99 two-phase Warp lifecycle.",
+      "linkA": "Full architecture diagrams in the repo",
+      "linkB": "Two-phase validator lifecycle: initiate → P-Chain ack → complete (within 23h).",
+      "linkC": "Self-healing validator set: anyone may purge a validator whose KYB attestation expired.",
+      "linkD": "Cross-L1 attestation propagation via ICM lands Q3 2026 (mirror AttestationStoreL1 on the L1)."
+    },
+    "resources": {
+      "title": "Resources",
+      "subtitle": "Everything else — repo, paper, explorers, standards, and contact.",
+      "github": "Source code, issues, CI status (157 tests).",
+      "litepaper": "Full product + technical brief (~3K words).",
+      "snowtrace": "Verified contracts on Fuji.",
+      "acp99": "Avalanche L1 ValidatorSetManager standard.",
+      "acp77": "Reinventing Subnets — continuous fee L1 validators.",
+      "contact": "Partnerships, integration support, press."
+    }
   }
 }

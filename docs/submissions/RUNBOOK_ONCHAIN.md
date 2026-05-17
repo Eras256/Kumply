@@ -170,9 +170,9 @@ echo "ValidatorManager:  https://testnet.snowtrace.io/address/$CONTRACT_VALIDATO
 echo "L1 SubnetID:       https://subnets-test.avax.network/subnets/$KUMPLY_L1_SUBNET_ID"
 
 # Live demo
-curl -sI https://kumply.io | head -1            # 200 OK
-curl -sI https://kumply.io/verify | head -1     # 200 OK
-curl -sI https://kumply.io/dashboard | head -1  # 200 OK
+curl -sI https://kumply.xyz | head -1            # 200 OK
+curl -sI https://kumply.xyz/verify | head -1     # 200 OK
+curl -sI https://kumply.xyz/dashboard | head -1  # 200 OK
 
 # Repo público + último commit visible
 git push origin main   # idempotente, ya pusheado

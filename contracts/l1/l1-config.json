@@ -6,8 +6,8 @@
   "vm": "subnet-evm",
   "vmVersion": "v0.7.0",
   "subnetEVMVersion": "v0.7.0",
-  "rpcEndpoint": "https://kumply-l1.rpc.kumply.io/ext/bc/{blockchainID}/rpc",
-  "wsEndpoint": "wss://kumply-l1.rpc.kumply.io/ext/bc/{blockchainID}/ws",
+  "rpcEndpoint": "https://kumply-l1.rpc.kumply.xyz/ext/bc/{blockchainID}/rpc",
+  "wsEndpoint": "wss://kumply-l1.rpc.kumply.xyz/ext/bc/{blockchainID}/ws",
   "explorerUrl": "https://kumply-l1.subnets.avax.network",
   "consensus": {
     "_comment": "Snowman consensus parameters tuned for institutional-grade finality",

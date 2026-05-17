@@ -23,8 +23,8 @@ Yes. KUMPLY is live on Avalanche Fuji testnet today:
 | ComplianceGate smart contract | Deployed + verified | https://testnet.snowtrace.io/address/0x3Bf8F8ea2573Eb3f386aDF72D191869c4827062B |
 | KumplyValidatorSetManager (ACP-99) | Deployed for KUMPLY L1 | https://testnet.snowtrace.io/address/0x903f6E46f965C9A1127652D761400dBe487F555D |
 | KUMPLY Compliance L1 (Subnet-EVM) | Registered on P-Chain Fuji | SubnetID `2buHAwNvaybnQ6vQYRS4TeXizZhAo33bhpnonAJu21CKYLZoST` |
-| Sumsub WebSDK + webhook | Live, end-to-end KYC flow | https://kumply.io/verify |
-| Public frontend | Live | https://kumply.io |
+| Sumsub WebSDK + webhook | Live, end-to-end KYC flow | https://kumply.xyz/verify |
+| Public frontend | Live | https://kumply.xyz |
 | Open-source monorepo | Public, MIT | https://github.com/Eras256/Kumply |
 | 157 unit tests | Green on every push | `.github/workflows/ci.yml` |
 
@@ -34,8 +34,8 @@ Yes. KUMPLY is live on Avalanche Fuji testnet today:
 - **Full technical docs** (CLAUDE.md): https://github.com/Eras256/Kumply/blob/main/claude_estrategico.md
 
 ## 5. Prototype
-- **Live URL:** https://kumply.io
-- **End-to-end demo flow:** https://kumply.io/verify (connect wallet → launch Sumsub WebSDK → KYC → on-chain attestation issued automatically via webhook → check on-chain via /dashboard)
+- **Live URL:** https://kumply.xyz
+- **End-to-end demo flow:** https://kumply.xyz/verify (connect wallet → launch Sumsub WebSDK → KYC → on-chain attestation issued automatically via webhook → check on-chain via /dashboard)
 - **Demo video:** `[FILL: 30-90s walkthrough URL]` (to record post-deploy)
 
 ## 6. Market analysis (Team1 explicit requirement)
@@ -88,7 +88,7 @@ Use of funds (line-itemized for accountability):
 | Litepaper translation (EN / ES / PT) by professional Web3 translator | $1,200 | LatAm market reach + Brazil expansion prep |
 | 60-second institutional pitch video (script + animator) | $1,500 | Sales asset for Bankaool / Arkangeles formalizations |
 | Integration documentation for top 5 Avalanche DApps | $800 | Trader Joe, Benqi, GMX-style protocols — onboarding kit |
-| Domain + 1 yr hosting (kumply.io + monitoring) | $500 | Already paid; this reimburses |
+| Domain + 1 yr hosting (kumply.xyz + monitoring) | $500 | Already paid; this reimburses |
 | Smart-contract internal review by 1 external Solidity dev before audit | $1,000 | De-risk before $25K formal audit in Q3 |
 
 100% of $5K consumed within 60 days of disbursement. Monthly receipts shared in a public GitHub issue for transparency.
@@ -116,7 +116,7 @@ Solo founder for now. Hiring plan post-grant: 1 senior Solidity dev (Q3 2026), 1
 
 ## 13. Contact
 
-- Email: hello@kumply.io
+- Email: hello@kumply.xyz
 - X / Twitter: @kumply_xyz
 - GitHub: https://github.com/Eras256
 - Discord: `[FILL handle]`

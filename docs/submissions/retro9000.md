@@ -39,10 +39,10 @@ The product has two layers, both production-grade today:
 https://github.com/Eras256/Kumply
 
 ## Live demo
-https://kumply.io
-https://kumply.io/verify (KYC flow)
-https://kumply.io/demo (ComplianceGate live check)
-https://kumply.io/dashboard (on-chain attestation explorer)
+https://kumply.xyz
+https://kumply.xyz/verify (KYC flow)
+https://kumply.xyz/demo (ComplianceGate live check)
+https://kumply.xyz/dashboard (on-chain attestation explorer)
 
 ## Litepaper
 https://github.com/Eras256/Kumply/blob/main/LITEPAPER.md (v1.1, ~3K words)
