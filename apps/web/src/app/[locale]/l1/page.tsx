@@ -7,7 +7,7 @@ const L1_SYMBOL           = "KMP";
 const L1_VM               = "Subnet-EVM v0.7.0";
 const L1_BLOCK_TIME       = "2s";
 const L1_RPC_URL          = process.env.NEXT_PUBLIC_KUMPLY_L1_RPC_URL || "https://subnets.avax.network/2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b/rpc";
-const L1_EXPLORER         = "https://testnet.avascan.info/subnet/2buHAwNvaybnQ6vQYRS4TeXizZhAo33bhpnonAJu21CKYLZoST";
+const L1_EXPLORER         = "https://testnet.avascan.info/blockchain/2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b";
 const SUBNET_ID           = process.env.NEXT_PUBLIC_KUMPLY_L1_SUBNET_ID || "2buHAwNvaybnQ6vQYRS4TeXizZhAo33bhpnonAJu21CKYLZoST";
 const BLOCKCHAIN_ID       = process.env.NEXT_PUBLIC_KUMPLY_L1_BLOCKCHAIN_ID || "2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b";
 const ATTESTATION_STORE   = process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76";
@@ -43,9 +43,9 @@ function Row({ label, value, mono = true }: { label: string; value: string; mono
     <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '0.85rem 0', borderBottom: '1px solid var(--border)', gap: '1rem' }}>
       <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', flexShrink: 0 }}>{label}</span>
       {mono ? (
-        <code style={{ color: 'var(--text-primary)', fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-all', textAlign: 'right' }}>{value}</code>
+        <code style={{ color: 'var(--text-primary)', fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-word', overflowWrap: 'anywhere', textAlign: 'right' }}>{value}</code>
       ) : (
-        <span style={{ color: 'var(--text-primary)', fontSize: '0.9rem', textAlign: 'right' }}>{value}</span>
+        <span style={{ color: 'var(--text-primary)', fontSize: '0.9rem', textAlign: 'right', wordBreak: 'break-word', overflowWrap: 'anywhere' }}>{value}</span>
       )}
     </li>
   );
