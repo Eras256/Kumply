@@ -8,9 +8,10 @@ interface TierCardProps {
   features: string[];
   recommended?: boolean;
   ctaLabel?: string;
+  levelName?: string;
 }
 
-export function TierCard({ tier, name, description, features, recommended, ctaLabel }: TierCardProps) {
+export function TierCard({ tier, name, description, features, recommended, ctaLabel, levelName }: TierCardProps) {
   const t = useTranslations('Tiers');
   const label = ctaLabel ?? t('ctaLabel');
 
@@ -83,7 +84,7 @@ export function TierCard({ tier, name, description, features, recommended, ctaLa
       </ul>
 
       <Link
-        href="/verify"
+        href={levelName ? `/verify?level=${levelName}` : '/verify'}
         className={`btn ${recommended ? 'btn-primary' : 'btn-secondary'}`}
         style={{ width: '100%', justifyContent: 'center' }}
       >
