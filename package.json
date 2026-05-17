@@ -17,6 +17,9 @@
     "lint": "pnpm -r lint",
     "format": "pnpm -r format"
   },
+  "devDependencies": {
+    "next": "16.2.6"
+  },
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=10.0.0"
