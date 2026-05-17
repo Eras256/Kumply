@@ -64,6 +64,7 @@ export function Footer() {
             <Link href="/developers/contracts" style={linkStyle}>{tDev('contracts.title')}</Link>
             <Link href="/developers/api" style={linkStyle}>{tDev('api.title')}</Link>
             <Link href="/l1" style={linkStyle}>{tFooter('l1') || 'Compliance L1'}</Link>
+            <a href="https://subnets-test.avax.network/subnets/2buHAwNvaybnQ6vQYRS4TeXizZhAo33bhpnonAJu21CKYLZoST" target="_blank" rel="noopener noreferrer" style={linkStyle}>Subnet Explorer ↗</a>
             <Link href="/docs" style={linkStyle}>{tFooter('docs') || 'Docs'}</Link>
 
           </nav>
