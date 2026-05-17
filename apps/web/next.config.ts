@@ -5,6 +5,13 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      accounts: false,
+    };
+    return config;
+  },
 
   async headers() {
     return [

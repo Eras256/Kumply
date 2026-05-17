@@ -3,7 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePathname, useRouter, Link } from "@/i18n/routing";
 import { useTranslations, useLocale } from "next-intl";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
+import { useAppKit } from "@reown/appkit/react";
 import Image from "next/image";
 import KumplyLogo from "@/app/images/KumplyLogo.png";
 
@@ -14,8 +15,8 @@ export function Navbar() {
   const pathname = usePathname();
 
   const { address, isConnected } = useAccount();
-  const { connectors, connect } = useConnect();
   const { disconnect } = useDisconnect();
+  const { open } = useAppKit();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -119,17 +120,14 @@ export function Navbar() {
                   <span className="navbar__wallet-dot" />
                   {t('connected')}
                 </span>
-                <span className="navbar__wallet-address">
+                <button className="btn btn-secondary navbar__wallet-btn" onClick={() => open()}>
                   {address?.slice(0, 6)}...{address?.slice(-4)}
-                </span>
-                <button className="btn btn-secondary navbar__wallet-btn" onClick={() => disconnect()}>
-                  {t('disconnect')}
                 </button>
               </div>
             ) : (
               <button
                 className="btn btn-primary navbar__connect-btn"
-                onClick={() => connect({ connector: connectors[0] })}
+                onClick={() => open()}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M19 7V4C19 3 18 2 17 2H3C2 2 1 3 1 4V20C1 21 2 22 3 22H17C18 22 19 21 19 20V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -225,20 +223,17 @@ export function Navbar() {
           <div className="navbar__mobile-wallet">
             {mounted && isConnected ? (
               <>
-                <span className="navbar__wallet-address navbar__wallet-address--lg">
-                  {address?.slice(0, 6)}...{address?.slice(-4)}
-                </span>
                 <button
                   className="btn btn-secondary navbar__mobile-wallet-btn"
-                  onClick={() => { disconnect(); closeMenu(); }}
+                  onClick={() => { open(); closeMenu(); }}
                 >
-                  {t('disconnect')}
+                  {address?.slice(0, 6)}...{address?.slice(-4)}
                 </button>
               </>
             ) : (
               <button
                 className="btn btn-primary navbar__mobile-wallet-btn"
-                onClick={() => { connect({ connector: connectors[0] }); closeMenu(); }}
+                onClick={() => { open(); closeMenu(); }}
               >
                 {t('connect')}
               </button>

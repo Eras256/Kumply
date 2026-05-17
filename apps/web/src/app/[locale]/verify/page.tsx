@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
-import { useAccount, useConnect } from "wagmi";
-import { injected } from "wagmi/connectors";
+import { useAccount } from "wagmi";
+import { useAppKit } from "@reown/appkit/react";
 import { useLocale, useTranslations } from "next-intl";
 import { KumplyClient } from "@kumply/sdk";
 
@@ -25,7 +25,7 @@ export default function VerifyPage() {
   const locale = useLocale();
   const searchParams = useSearchParams();
   const { address, isConnected } = useAccount();
-  const { connect } = useConnect();
+  const { open } = useAppKit();
   const [step, setStep] = useState<VerifyStep>("connect");
   const validLevels = ["basic-kyc", "standard-kyc", "enhanced-kyc", "business-kyb", "agent-kya"];
   const levelParam = searchParams.get("level") ?? "";
@@ -165,7 +165,7 @@ export default function VerifyPage() {
           </div>
           <h1 className="page-title verify-title-lg">{t("pageTitle")}</h1>
           <p className="page-description" style={{ marginBottom: "2.5rem" }}>{t("pageDesc")}</p>
-          <button className="btn btn-primary" style={{ fontSize: "1rem", padding: "0.9rem 2.25rem" }} onClick={() => connect({ connector: injected() })}>
+          <button className="btn btn-primary" style={{ fontSize: "1rem", padding: "0.9rem 2.25rem" }} onClick={() => open()}>
             {t("connectBtn")}
           </button>
           <p style={{ marginTop: "1.5rem", fontSize: "0.8rem", color: "var(--text-tertiary)" }}>⚠ {t("testnetWarning")}</p>

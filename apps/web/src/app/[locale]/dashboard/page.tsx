@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { useAccount, useConnect } from "wagmi";
-import { injected } from "wagmi/connectors";
+import { useAccount } from "wagmi";
+import { useAppKit } from "@reown/appkit/react";
 import { useTranslations } from "next-intl";
 import { createPublicClient, http, parseAbiItem } from "viem";
 import { avalancheFuji } from "viem/chains";
@@ -46,7 +46,7 @@ interface AttestationStatus {
 export default function DashboardPage() {
   const t = useTranslations("Dashboard");
   const { address, isConnected } = useAccount();
-  const { connect } = useConnect();
+  const { open } = useAppKit();
 
   const [events, setEvents] = useState<AttestationEvent[]>([]);
   const [totalAttestations, setTotalAttestations] = useState<number | null>(null);
@@ -330,7 +330,7 @@ export default function DashboardPage() {
           {!isConnected && (
             <button
               className="btn btn-secondary"
-              onClick={() => connect({ connector: injected() })}
+              onClick={() => open()}
               style={{ marginTop: "1rem", fontSize: "0.8rem", padding: "0.5rem 1rem" }}
             >
               {t("connectToLookup")}
