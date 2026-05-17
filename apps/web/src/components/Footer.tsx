@@ -78,7 +78,7 @@ export function Footer() {
             <Link href="/developers" style={linkStyle}>TypeScript SDK</Link>
             <Link href="/developers/contracts" style={linkStyle}>{tDev('contracts.title')}</Link>
             <Link href="/developers/api" style={linkStyle}>{tDev('api.title')}</Link>
-            <a href="https://github.com/KumplyProtocol" target="_blank" rel="noopener noreferrer" style={linkStyle}>GitHub Repository</a>
+
           </nav>
 
           {/* Column 4: Legal & Compliance */}
