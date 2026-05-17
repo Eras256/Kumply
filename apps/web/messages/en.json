@@ -311,11 +311,11 @@
     "noEvents": "No attestation events found in the last 10,000 blocks."
   },
   "L1": {
-    "badge": "Deploy-Ready · Not Yet Live",
+    "badge": "Live on Fuji Testnet",
     "title": "KUMPLY Compliance L1",
     "subtitle": "The first Avalanche L1 where only KYB-verified institutions can validate. Every block is signed by a licensed entity — compliance baked into consensus.",
-    "statusTitle": "All architecture, contracts, genesis and tests are complete",
-    "statusDesc": "The L1 is deploy-ready: the KumplyValidatorSetManager contract is written and tested (27 tests passing), genesis is configured, and the deployment script is one command. We are coordinating with founding institutional validators (Bankaool, Arkangeles) before going live on Fuji.",
+    "statusTitle": "L1 Successfully Deployed on Fuji Testnet",
+    "statusDesc": "The KUMPLY L1 is fully operational on Fuji: the KumplyValidatorSetManager is actively managing the validator set via ACP-99, and the KMP gas token is active. We are currently coordinating with founding institutional validators (Bankaool, Arkangeles) to join the live consensus set.",
     "viewOnGitHub": "View Source on GitHub",
     "chainIdentity": "Chain Identity",
     "chainName": "Name",
