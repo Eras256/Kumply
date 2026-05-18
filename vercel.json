@@ -11,11 +11,7 @@
     "NEXT_PUBLIC_VERIFIER_ADDRESS": "0xD65042534CE80fcb641fd6Eb99a16eBF6C0cd076",
     "CONTRACT_ATTESTATION_STORE": "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76",
     "FUJI_RPC_URL": "https://api.avax-test.network/ext/bc/C/rpc",
-    "SUMSUB_APP_TOKEN": "REDACTED_ROTATE_THIS_KEY",
-    "SUMSUB_SECRET_KEY": "REDACTED_ROTATE_THIS_KEY",
-    "SUMSUB_WEBHOOK_SECRET": "",
-    "SUMSUB_BASE_URL": "https://api.sumsub.com",
-    "DEPLOYER_PRIVATE_KEY": "REDACTED_ROTATE_THIS_KEY"
+    "SUMSUB_BASE_URL": "https://api.sumsub.com"
   },
   "headers": [
     {

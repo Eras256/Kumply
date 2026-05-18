@@ -51,3 +51,11 @@ LEGAL_REVIEW_BRIEF.md
 LEGAL_*.md
 INTERNAL_*.md
 docs/internal/
+claude_estrategico.md
+
+# ── Utility / debug scripts (one-off tooling) ──────────────────
+replace.py
+update_docs.py
+*_keys.txt
+*_paths.txt
+missing_in_*.txt
