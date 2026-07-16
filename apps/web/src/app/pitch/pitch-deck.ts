@@ -501,7 +501,7 @@ export const DECK_HTML = `
       <table>
         <thead><tr><th>Milestone</th><th>Deliverable</th><th>Weeks</th><th>Budget</th></tr></thead>
         <tbody>
-          <tr><td>M1</td><td>Security hardening of AttestationStore + ComplianceGate: static analysis (Slither/Aderyn) + fuzz and invariant tests, findings fixed, report published in the repo; independent spot-review by a solo security researcher</td><td class="num">1–3</td><td class="num">$1,500</td></tr>
+          <tr><td>M1</td><td>Security &amp; quality hardening of AttestationStore + ComplianceGate: static analysis (Slither/Aderyn), fuzz + invariant test suite, expanded edge-case coverage, and a published threat-model report — findings fixed, all in-repo</td><td class="num">1–3</td><td class="num">$1,500</td></tr>
           <tr><td>M2</td><td>Sumsub production tier activated (Compliance plan); first real KYC/KYB attestations issued on-chain end-to-end</td><td class="num">2–6</td><td class="num">$3,500</td></tr>
           <tr><td>M3</td><td>Mainnet C-Chain launch of the non-custodial core — AttestationStore + ComplianceGate with fees at zero (no funds custodied), contracts verified; SDK mainnet release on npm</td><td class="num">6–9</td><td class="num">$2,000</td></tr>
           <tr><td>M4</td><td>KUMPLY L1 validator activation on Fuji; ICM integration for cross-L1 attestation reads; 2 pilot integrations generating real mainnet activity</td><td class="num">9–12</td><td class="num">$3,000</td></tr>
@@ -511,9 +511,10 @@ export const DECK_HTML = `
     <p class="note"><strong>Sized for discretion.</strong> Milestones are independently scoped, so the plan degrades gracefully
       if funded below the full ask: <strong>$5,000</strong> delivers M1–M2 (hardened contracts + real production verifications),
       <strong>$7,000</strong> adds the mainnet launch, and the full <strong>$10,000</strong> completes L1 activation and pilot
-      integrations. What this budget deliberately does <strong>not</strong> include: a formal audit of the L1 validator
-      manager — that is scoped for Retro9000 / Accelerator funding once mainnet usage proves demand. Nothing this
-      grant puts on mainnet custodies user funds.</p>
+      integrations. Every milestone is builder time plus hard costs — chiefly Sumsub's production tier. What this
+      budget deliberately does <strong>not</strong> include: a formal third-party audit of the L1 validator manager,
+      scoped for Retro9000 / Accelerator funding once mainnet usage proves demand. Nothing this grant puts on
+      mainnet custodies user funds.</p>
   </section>
 
   <!-- 12 · Ask -->
