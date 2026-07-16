@@ -22,9 +22,9 @@ export const MAINNET_CONFIG: NetworkConfig = {
 };
 
 /**
- * KUMPLY Compliance L1 — Live on Fuji Testnet.
+ * KUMPLY Compliance L1 — chain registered on Fuji; validator activation pending.
  *
- * Custom Avalanche L1 where only KYB-verified institutions (banks, funds, ...)
+ * Custom Avalanche L1 designed so only KYB-verified institutions (banks, funds, ...)
  * can validate. Built per ACP-77 (Reinventing Subnets) and ACP-99 (ValidatorSetManager).
  * See {@link https://build.avax.network/docs/acps/77-reinventing-subnets ACP-77}
  * and {@link https://build.avax.network/docs/acps/99-validatorsetmanager-contract ACP-99}.

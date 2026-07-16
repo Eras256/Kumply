@@ -9,19 +9,9 @@ import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 
 const queryClient = new QueryClient();
 
-// Add KUMPLY L1 Network
-const kumplyL1 = {
-  id: 43210,
-  name: "KUMPLY Compliance L1",
-  nativeCurrency: { name: "KMP", symbol: "KMP", decimals: 18 },
-  rpcUrls: {
-    default: { http: ["https://subnets.avax.network/2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b/rpc"] },
-  },
-  blockExplorers: {
-    default: { name: "KUMPLY Explorer", url: "https://testnet.avascan.info/blockchain/2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b" },
-  },
-  testnet: true,
-};
+// KUMPLY Compliance L1 (chainId 43210) — re-add to `networks` once the ACP-77
+// conversion runs and the first validator is live; until then the chain has no
+// RPC and offering it in the wallet modal adds a dead network.
 
 const projectId = process.env.NEXT_PUBLIC_REOWN_PROJECT_ID || "299ad4e99fab1b67cb95953e76fa45b6";
 
@@ -32,7 +22,7 @@ const metadata = {
   icons: ["https://kumply.xyz/logo.png"],
 };
 
-const networks = [avalancheFuji, kumplyL1] as any;
+const networks = [avalancheFuji] as any;
 
 const wagmiAdapter = new WagmiAdapter({
   networks,

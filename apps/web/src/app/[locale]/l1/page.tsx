@@ -6,7 +6,7 @@ const L1_NAME             = "KUMPLY Compliance L1";
 const L1_SYMBOL           = "KMP";
 const L1_VM               = "Subnet-EVM v0.7.0";
 const L1_BLOCK_TIME       = "2s";
-const L1_RPC_URL          = process.env.NEXT_PUBLIC_KUMPLY_L1_RPC_URL || "https://subnets.avax.network/2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b/rpc";
+const L1_RPC_URL          = "Available after validator activation (ACP-77 conversion pending)";
 const L1_EXPLORER         = "https://testnet.avascan.info/blockchain/p/tx/2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b";
 const SUBNET_ID           = process.env.NEXT_PUBLIC_KUMPLY_L1_SUBNET_ID || "2buHAwNvaybnQ6vQYRS4TeXizZhAo33bhpnonAJu21CKYLZoST";
 const BLOCKCHAIN_ID       = process.env.NEXT_PUBLIC_KUMPLY_L1_BLOCKCHAIN_ID || "2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b";
@@ -108,7 +108,7 @@ export default function L1Page() {
         <div className="glass-card" style={{ padding: '2rem' }}>
           <h3 style={{ marginBottom: '1.5rem', color: 'var(--text-primary)', fontSize: '1.05rem' }}>{t('endpoints')}</h3>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            <Row label="RPC" value={L1_RPC_URL} />
+            <Row label="RPC" value={L1_RPC_URL} mono={false} />
             <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '0.85rem 0', borderBottom: '1px solid var(--border)', gap: '1rem' }}>
               <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', flexShrink: 0 }}>{t('explorer')}</span>
               <a href={L1_EXPLORER} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-all', textAlign: 'right', textDecoration: 'underline' }}>Avascan Testnet ↗</a>

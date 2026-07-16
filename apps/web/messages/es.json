@@ -311,11 +311,11 @@
     "noEvents": "No se encontraron eventos de attestación en los últimos 10,000 bloques."
   },
   "L1": {
-    "badge": "En Vivo en Testnet Fuji",
+    "badge": "Cadena Registrada en Fuji · Activación en Progreso",
     "title": "KUMPLY Compliance L1",
-    "subtitle": "La primera L1 de Avalanche donde solo instituciones KYB-verificadas pueden validar. Cada bloque está firmado por una entidad regulada — el compliance vive dentro del consenso.",
-    "statusTitle": "L1 Desplegada Exitosamente en Testnet Fuji",
-    "statusDesc": "La L1 de KUMPLY está totalmente operativa en Fuji: el KumplyValidatorSetManager gestiona activamente los validadores mediante ACP-99, y el token de gas KMP está activo. Hay slots de validador institucional abiertos — cualquier institución verificada por KYB puede unirse a la red en vivo.",
+    "subtitle": "La primera L1 de Avalanche diseñada para que solo instituciones KYB-verificadas puedan validar. Cada bloque firmado por una entidad regulada — el compliance vive dentro del consenso.",
+    "statusTitle": "Cadena Registrada en Fuji — Activación de Validadores en Progreso",
+    "statusDesc": "La cadena KUMPLY (ID 43210, token de gas KMP) está registrada en el P-Chain de Fuji con su genesis comprometido, y el KumplyValidatorSetManager (ACP-99) está desplegado y verificado en C-Chain con 27 tests dedicados. Siguiente paso: la conversión ACP-77 y la activación del primer nodo validador. Los slots de validador fundador están abiertos — cualquier institución verificada por KYB puede unirse.",
     "viewOnGitHub": "Ver Código en GitHub",
     "chainIdentity": "Identidad de la Cadena",
     "chainName": "Nombre",
