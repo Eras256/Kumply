@@ -24,7 +24,7 @@ export interface TierConfig {
   requiredChecks: string[];
 }
 
-/** Supported networks. `kumply-l1` is the dedicated Compliance L1 (Deploy-Ready, not yet live). */
+/** Supported networks. `kumply-l1` is the dedicated Compliance L1 (live on Fuji Testnet). */
 export type KumplyNetwork = "fuji" | "mainnet" | "kumply-l1";
 
 /** Options for creating a KumplyClient instance */

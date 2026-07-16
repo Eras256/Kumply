@@ -1,6 +1,6 @@
 {
   "name": "@kumply/sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "TypeScript SDK for KUMPLY compliance infrastructure on the AVALANCHE® public blockchain",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,7 @@
   "author": "KUMPLY Team",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KumplyProtocol/kumply.git",
+    "url": "git+https://github.com/Eras256/Kumply.git",
     "directory": "packages/sdk"
   },
   "keywords": [
