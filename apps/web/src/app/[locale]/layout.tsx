@@ -24,10 +24,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "KUMPLY — On-Chain Compliance for the AVALANCHE® Blockchain",
+    default: "KUMPLY — On-Chain Compliance for the Avalanche® Blockchain",
     template: "%s | KUMPLY",
   },
-  description: "The complete compliance toolkit for the AVALANCHE® blockchain. KYC for people, KYB for companies, KYA for AI agents — verify once, access everywhere via Interchain Messaging (ICM). Non-custodial. Software-only. No PII stored.",
+  description: "The complete compliance toolkit for the Avalanche® blockchain. KYC for people, KYB for companies, KYA for AI agents — verify once, access everywhere via Interchain Messaging (ICM). Non-custodial. Software-only. No PII stored.",
   keywords: ["KYC", "KYB", "KYA", "compliance", "Avalanche", "DeFi", "blockchain", "identity", "LatAm", "eERC", "Interchain Messaging", "ICM", "Fuji", "non-custodial", "on-chain", "Avalanche L1", "AI agent compliance"],
   metadataBase: new URL("https://kumply.xyz"),
   icons: {
@@ -42,25 +42,25 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "KUMPLY — On-Chain Compliance for the AVALANCHE® Blockchain",
-    description: "Verify once, access everywhere. KYC, KYB, and KYA compliance credentials via eERC encrypted tokens and Interchain Messaging (ICM) on the AVALANCHE® blockchain.",
+    title: "On-Chain Compliance for the Avalanche® Blockchain",
+    description: "Verify once, access everywhere. KYC, KYB, and KYA compliance credentials via encrypted tokens and Interchain Messaging (ICM) on the Avalanche® blockchain. Non-custodial, software-only, no PII stored.",
     type: "website",
     locale: "en_US",
     alternateLocale: "es_MX",
-    siteName: "KUMPLY Protocol",
+    siteName: "KUMPLY",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "KUMPLY — Compliance Infrastructure for the AVALANCHE® Public Blockchain",
+        alt: "KUMPLY — Compliance Infrastructure for the Avalanche® Public Blockchain",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "KUMPLY — On-Chain Compliance for the AVALANCHE® Blockchain",
-    description: "Non-custodial identity attestations for DeFi. KYC, KYB, and KYA — verify once, access everywhere on the AVALANCHE® blockchain.",
+    title: "On-Chain Compliance for the Avalanche® Blockchain",
+    description: "Verify once, access everywhere. KYC, KYB, and KYA compliance credentials via encrypted tokens and Interchain Messaging (ICM) on the Avalanche® blockchain. Non-custodial, software-only, no PII stored.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -89,7 +89,7 @@ export default async function RootLayout({
     name: "KUMPLY Protocol",
     applicationCategory: "BlockchainApplication",
     operatingSystem: "Web",
-    description: "The complete compliance toolkit for the AVALANCHE® blockchain. KYC for people, KYB for companies, KYA for AI agents — via eERC encrypted credentials and Interchain Messaging (ICM).",
+    description: "The complete compliance toolkit for the Avalanche® blockchain. KYC for people, KYB for companies, KYA for AI agents — via encrypted credentials and Interchain Messaging (ICM).",
     offers: {
       "@type": "Offer",
       price: "0",

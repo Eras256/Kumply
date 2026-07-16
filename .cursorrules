@@ -1,5 +1,5 @@
 # KUMPLY — Global Instructions for AI Assistant
-# Última actualización: 17 Mayo 2026
+# Última actualización: 14 Julio 2026
 
 ## LECTURA OBLIGATORIA
 Siempre, al iniciar una nueva conversación o recibir una nueva tarea en este repositorio, DEBES obligatoriamente leer y asimilar el contenido de los siguientes dos archivos antes de escribir código o proponer soluciones:
@@ -15,7 +15,7 @@ Si tienes dudas sobre AVALANCHE, NO alucines ni uses tu conocimiento base obsole
 Al finalizar cualquier tarea significativa (implementar feature, refactorizar, agregar dependencias, modificar contratos o tests), **es TU OBLIGACIÓN** actualizar `claude_estrategico.md` y `CLAUDE.md` para reflejar esos cambios *antes* de dar la tarea por concluida. Nunca dejes que el código se desincronice de esta documentación.
 
 ## QUICK REFERENCE
-- **Tests:** `pnpm test` → 134 tests (87 contracts + 30 SDK + 17 API)
+- **Tests:** `pnpm test` → 157 tests (110 contracts + 30 SDK + 17 API)
 - **Stack:** Solidity 0.8.28 · Next.js 16 · React 19 · Express · Reown AppKit + Wagmi · pnpm workspaces
 - **Red:** Avalanche Fuji Testnet (chainId 43113)
 - **i18n:** `import { Link } from "@/i18n/routing"` — NUNCA `next/link`

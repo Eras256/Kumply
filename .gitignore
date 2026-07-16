@@ -45,6 +45,7 @@ yarn-error.log*
 .vercel
 CLAUDE.md
 claude.md
+Memory.md
 
 # ── Internal / not for public repo ──────────────────────────────
 LEGAL_REVIEW_BRIEF.md
