@@ -114,11 +114,11 @@ export default async function RootLayout({
         }}>Skip to main content</a>
         <NextIntlClientProvider messages={messages}>
           <Web3Provider>
-            <Navbar key={locale} />
+            <Navbar />
             <main id="main-content" className="page" role="main">
               {children}
             </main>
-            <Footer key={locale} />
+            <Footer />
           </Web3Provider>
         </NextIntlClientProvider>
       </body>

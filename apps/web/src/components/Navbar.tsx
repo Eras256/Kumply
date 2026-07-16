@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useTransition } from "react";
 import { usePathname, useRouter, Link } from "@/i18n/routing";
+import { usePathname as useNextPathname } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { useAccount, useDisconnect } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
@@ -13,7 +14,10 @@ export function Navbar() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const rawPathname = useNextPathname();
   const [isPending, startTransition] = useTransition();
+
+  const currentLang = rawPathname?.startsWith('/es') ? 'es' : 'en';
 
   const switchLocale = (newLocale: string) => {
     const search = window.location.search;
@@ -113,11 +117,11 @@ export function Navbar() {
             <div className="navbar__lang">
               <button
                 onClick={() => switchLocale('en')}
-                className={`navbar__lang-btn ${locale === 'en' ? 'navbar__lang-btn--active' : ''}`}
+                className={`navbar__lang-btn ${currentLang === 'en' ? 'navbar__lang-btn--active' : ''}`}
               >EN</button>
               <button
                 onClick={() => switchLocale('es')}
-                className={`navbar__lang-btn ${locale === 'es' ? 'navbar__lang-btn--active' : ''}`}
+                className={`navbar__lang-btn ${currentLang === 'es' ? 'navbar__lang-btn--active' : ''}`}
               >ES</button>
             </div>
 
@@ -152,11 +156,11 @@ export function Navbar() {
             <div className="navbar__lang navbar__mobile-toplang">
               <button
                 onClick={() => switchLocale('en')}
-                className={`navbar__lang-btn ${locale === 'en' ? 'navbar__lang-btn--active' : ''}`}
+                className={`navbar__lang-btn ${currentLang === 'en' ? 'navbar__lang-btn--active' : ''}`}
               >EN</button>
               <button
                 onClick={() => switchLocale('es')}
-                className={`navbar__lang-btn ${locale === 'es' ? 'navbar__lang-btn--active' : ''}`}
+                className={`navbar__lang-btn ${currentLang === 'es' ? 'navbar__lang-btn--active' : ''}`}
               >ES</button>
             </div>
 
@@ -219,11 +223,11 @@ export function Navbar() {
           <div className="navbar__mobile-lang">
             <button
               onClick={() => { switchLocale('en'); closeMenu(); }}
-              className={`navbar__lang-btn navbar__lang-btn--lg ${locale === 'en' ? 'navbar__lang-btn--active' : ''}`}
+              className={`navbar__lang-btn navbar__lang-btn--lg ${currentLang === 'en' ? 'navbar__lang-btn--active' : ''}`}
             >EN</button>
             <button
               onClick={() => { switchLocale('es'); closeMenu(); }}
-              className={`navbar__lang-btn navbar__lang-btn--lg ${locale === 'es' ? 'navbar__lang-btn--active' : ''}`}
+              className={`navbar__lang-btn navbar__lang-btn--lg ${currentLang === 'es' ? 'navbar__lang-btn--active' : ''}`}
             >ES</button>
           </div>
 
