@@ -70,7 +70,7 @@ Layer 1 — AttestationStore on C-Chain (LIVE).
 5 tiers: Basic KYC → Standard → Enhanced → KYB → KYA.
 DApps gate actions with 3 lines of Solidity via @KumplyComplianceGate.
 
-Layer 2 — KUMPLY Compliance L1 (LIVE on Fuji).
+Layer 2 — KUMPLY Compliance L1 (chain registered on Fuji, validator activation pending).
 Validators must hold Tier-4 (KYB). Open to all 5 tiers as users.
 
 3/ ACP-99 compliant from day one.

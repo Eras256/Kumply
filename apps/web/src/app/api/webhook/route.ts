@@ -66,8 +66,9 @@ export async function POST(request: Request) {
     const privateKey = (process.env.DEPLOYER_PRIVATE_KEY) as `0x${string}` | undefined;
     const contractAddress = (
       process.env.CONTRACT_ATTESTATION_STORE ||
-      process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE
-    ) as `0x${string}` | undefined;
+      process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE ||
+      '0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76'
+    ) as `0x${string}`;
     const rpcUrl =
       process.env.FUJI_RPC_URL ||
       process.env.NEXT_PUBLIC_FUJI_RPC_URL ||

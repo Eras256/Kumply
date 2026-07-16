@@ -9,7 +9,7 @@ import { KumplyClient } from "@kumply/sdk";
 
 type VerifyStep = "connect" | "tierSelect" | "kyc" | "pending" | "done" | "error";
 
-const ATTESTATION_STORE = process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE as `0x${string}`;
+const ATTESTATION_STORE = (process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76") as `0x${string}`;
 
 const TIER_OPTIONS = [
   { levelName: "basic-kyc",    tier: 1, recommended: false, icon: "🔵" },

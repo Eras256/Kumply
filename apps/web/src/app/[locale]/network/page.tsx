@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 
-const ATTESTATION_STORE = process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "";
-const COMPLIANCE_GATE   = process.env.NEXT_PUBLIC_CONTRACT_COMPLIANCE_GATE || "";
-const VERIFIER_ADDRESS  = process.env.NEXT_PUBLIC_VERIFIER_ADDRESS || "";
+const ATTESTATION_STORE = process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76";
+const COMPLIANCE_GATE   = process.env.NEXT_PUBLIC_CONTRACT_COMPLIANCE_GATE || "0x3Bf8F8ea2573Eb3f386aDF72D191869c4827062B";
+const VERIFIER_ADDRESS  = process.env.NEXT_PUBLIC_VERIFIER_ADDRESS || "0xD65042534CE80fcb641fd6Eb99a16eBF6C0cd076";
 const SNOWTRACE_BASE    = "https://testnet.snowtrace.io/address";
 
 export default function NetworkPage() {

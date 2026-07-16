@@ -8,7 +8,7 @@ import { createPublicClient, http, parseAbiItem } from "viem";
 import { avalancheFuji } from "viem/chains";
 import { KumplyClient, ATTESTATION_STORE_ABI } from "@kumply/sdk";
 
-const CONTRACT = process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE as `0x${string}`;
+const CONTRACT = (process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76") as `0x${string}`;
 const EXPLORER = "https://testnet.snowtrace.io";
 
 const TIER_COLORS: Record<number, string> = {
@@ -84,9 +84,8 @@ export default function DashboardPage() {
       setVerificationFee(fee);
       setTotalFeesCollected(collected);
 
-      // Read last 10,000 blocks of AttestationIssued events
-      const currentBlock = await publicClient.getBlockNumber();
-      const fromBlock = currentBlock > 10000n ? currentBlock - 10000n : 0n;
+      // Read from block 0 to capture all historical attestations
+      const fromBlock = 0n;
 
       const logs = await publicClient.getLogs({
         address: CONTRACT,
@@ -94,7 +93,6 @@ export default function DashboardPage() {
           "event AttestationIssued(address indexed subject, uint32 tier, uint64 expiry, address indexed verifier)"
         ),
         fromBlock,
-        toBlock: currentBlock,
       });
 
       const parsed: AttestationEvent[] = logs

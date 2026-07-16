@@ -175,7 +175,7 @@ Testnet (Fuji) genesis allocation: **1,000,000,000 KMP, 100% to the KUMPLY opera
 |---|---|---|
 | **Q1 2026** | AttestationStore + ComplianceGate deployed and verified on Fuji | ✅ Done |
 | **Q2 2026** | ACP-99 ValidatorSetManager refactor · 110 tests passing · litepaper · grant submissions (Retro9000 R3 by 18 May, Team1, Blizzard) | ✅ Done (this litepaper) |
-| **Q2 2026** | KUMPLY Compliance L1 live on Fuji · Sumsub integration end-to-end · institutional demo presented | ✅ Done |
+| **Q2 2026** | KUMPLY Compliance L1 chain registered on Fuji (validator activation pending) · Sumsub integration end-to-end · institutional demo presented | ✅ Done |
 | **Q3 2026** | Mexican legal written opinion · corporate structure final · T&Cs published · smart-contract audit (Code4rena or OpenZeppelin) · Verifier-as-a-Service program · **AttestationStoreL1.sol** (ICM-mirrored attestation read on the L1, sub-second tier lookups for L1-native DApps) · **AgentRegistry.sol** (KYA Tier-5 extension with model fingerprint, behavior bounds, liveness oracle) · agentic-DeFi pilot DApp | 📋 Planned |
 | **Q4 2026** | Mainnet launch (KMP genesis re-defined by governance) · first three institutional validators · live attestations for a first institutional partner's customers · live KYA attestations for at least one autonomous-agent DeFi protocol on the L1 · cross-L1 attestation propagation demo across 3 Avalanche L1s | 📋 Planned |
 | **Q1 2027** | Multi-jurisdiction tier expansion (Colombia, Brazil, Chile) · stablecoin partnership · ICTT KMP↔AVAX bridge (if governance approves) | 📋 Planned |

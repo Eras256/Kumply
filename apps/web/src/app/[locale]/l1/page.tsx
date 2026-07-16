@@ -15,7 +15,7 @@ const VALIDATOR_SET_MANAGER = process.env.NEXT_PUBLIC_CONTRACT_VALIDATOR_SET_MAN
 
 // Founding validator slots (KYB-gated — each must hold a Tier 4 attestation)
 const FOUNDING_VALIDATORS = [
-  { name: "KUMPLY Protocol",       role: "Treasury validator",                     tier: 4, status: "committed" },
+  { name: "KUMPLY Protocol",       role: "Treasury validator",                     tier: 4, status: "committed", nodeId: "NodeID-EzGaipqomyK9UKx9DBHV6Ky3y68hoknrF" },
   { name: "Institutional Slot 2",  role: "Digital bank · onboarding open",         tier: 4, status: "open"      },
   { name: "Institutional Slot 3",  role: "Venture fund · onboarding open",         tier: 4, status: "open"      },
   { name: "Institutional Slot 4",  role: "Regional consortium · onboarding open",  tier: 4, status: "open"      },
@@ -189,6 +189,11 @@ export default function L1Page() {
                 <div style={{ minWidth: 0 }}>
                   <div style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.9rem' }}>{v.name}</div>
                   <div style={{ color: 'var(--text-tertiary)', fontSize: '0.78rem' }}>{v.role}</div>
+                  {v.nodeId && (
+                    <div style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.75rem', marginTop: '0.2rem', wordBreak: 'break-all' }}>
+                      {v.nodeId}
+                    </div>
+                  )}
                 </div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>

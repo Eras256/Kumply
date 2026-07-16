@@ -7,8 +7,8 @@ import { useAppKit } from "@reown/appkit/react";
 import { Link } from "@/i18n/routing";
 import { KumplyClient } from "@kumply/sdk";
 
-const CONTRACT = process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE as `0x${string}`;
-const COMPLIANCE_GATE = process.env.NEXT_PUBLIC_CONTRACT_COMPLIANCE_GATE as `0x${string}`;
+const CONTRACT = (process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76") as `0x${string}`;
+const COMPLIANCE_GATE = (process.env.NEXT_PUBLIC_CONTRACT_COMPLIANCE_GATE || "0x3Bf8F8ea2573Eb3f386aDF72D191869c4827062B") as `0x${string}`;
 const EXPLORER = "https://testnet.snowtrace.io";
 
 const TIER_COLORS: Record<number, string> = {
