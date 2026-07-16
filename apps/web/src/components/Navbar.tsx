@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useTransition } from "react";
 import { usePathname, useRouter, Link } from "@/i18n/routing";
 import { useTranslations, useLocale } from "next-intl";
 import { useAccount, useDisconnect } from "wagmi";
@@ -13,10 +13,13 @@ export function Navbar() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
 
   const switchLocale = (newLocale: string) => {
     const search = window.location.search;
-    window.location.href = `/${newLocale}${pathname === '/' ? '' : pathname}${search}`;
+    startTransition(() => {
+      router.replace(`${pathname}${search}`, { locale: newLocale });
+    });
   };
 
   const { address, isConnected } = useAccount();
