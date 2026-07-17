@@ -38,6 +38,41 @@ export const KUMPLY_L1_CONFIG: NetworkConfig = {
   symbol: "KMP",
 };
 
+/**
+ * Tier constants matching the smart contract (1–5).
+ *
+ * @example
+ * ```typescript
+ * import { TIER } from "@kumply/sdk";
+ * await client.hasTier(address, TIER.KYB); // true if tier >= 4
+ * ```
+ */
+export const TIER = {
+  BASIC: 1,
+  STANDARD: 2,
+  ENHANCED: 3,
+  KYB: 4,
+  KYA: 5,
+} as const;
+
+/**
+ * Official KUMPLY deployments — source-verified on Snowtrace.
+ *
+ * Mainnet C-Chain runs as a read-only beta with `verificationFee = 0`.
+ * Fuji hosts the full suite, including the automated Sumsub KYC flow.
+ */
+export const DEPLOYMENTS = {
+  mainnet: {
+    attestationStore: "0xa116261Ed3a848A9E1cd34923D5A0442D1455F71",
+    complianceGate: "0x01BEEA13A485c7bAD58f926E345325e9e3773bEe",
+  },
+  fuji: {
+    attestationStore: "0xa3Bc5564A18e107807aF41fF2a5215Db050b22dD",
+    complianceGate: "0xcFDdeA5482baE9A6733B58F6a39FC36BCe6164cF",
+    validatorSetManager: "0x903f6E46f965C9A1127652D761400dBe487F555D",
+  },
+} as const;
+
 /** KYC tier definitions matching the smart contract */
 export const TIER_DEFINITIONS: TierConfig[] = [
   {

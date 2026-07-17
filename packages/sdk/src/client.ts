@@ -5,6 +5,7 @@ import type {
   Attestation,
   TierConfig,
   KumplyClientOptions,
+  KumplyNetwork,
 } from "./types";
 import { ATTESTATION_STORE_ABI } from "./contracts";
 import { FUJI_CONFIG, MAINNET_CONFIG, KUMPLY_L1_CONFIG, TIER_DEFINITIONS } from "./constants";
@@ -32,16 +33,23 @@ const kumplyL1Chain: Chain = defineChain({
  *
  * @example
  * ```typescript
- * import { KumplyClient } from '@kumply/sdk';
+ * import { KumplyClient, DEPLOYMENTS, TIER } from '@kumply/sdk';
  *
- * const client = new KumplyClient({ network: 'fuji' });
+ * const client = new KumplyClient({
+ *   network: 'mainnet',
+ *   contractAddress: DEPLOYMENTS.mainnet.attestationStore,
+ * });
  * const result = await client.verify('0x...');
  * console.log(result.verified); // true
  * ```
  */
 export class KumplyClient {
-  private publicClient: PublicClient;
-  private contractAddress: `0x${string}`;
+  /** Underlying viem client — exposed for advanced use (custom reads, logs). */
+  readonly publicClient: PublicClient;
+  /** AttestationStore address this client reads from. */
+  readonly contractAddress: `0x${string}`;
+  /** Network this client is connected to. */
+  readonly network: KumplyNetwork;
   private chain: Chain;
 
   constructor(options: KumplyClientOptions) {
@@ -49,12 +57,15 @@ export class KumplyClient {
     if (options.network === "mainnet") {
       config = MAINNET_CONFIG;
       this.chain = avalanche;
+      this.network = "mainnet";
     } else if (options.network === "kumply-l1") {
       config = KUMPLY_L1_CONFIG;
       this.chain = kumplyL1Chain;
+      this.network = "kumply-l1";
     } else {
       config = FUJI_CONFIG;
       this.chain = avalancheFuji;
+      this.network = "fuji";
     }
 
     this.publicClient = createPublicClient({
@@ -67,6 +78,11 @@ export class KumplyClient {
       throw new Error('@kumply/sdk: contractAddress is required. Deploy AttestationStore first or pass the deployed address.');
     }
     this.contractAddress = options.contractAddress as `0x${string}`;
+  }
+
+  /** Chain ID of the connected network (43113 Fuji · 43114 Mainnet · 43210 KUMPLY L1). */
+  get chainId(): number {
+    return this.chain.id;
   }
 
   /**
@@ -135,6 +151,23 @@ export class KumplyClient {
   async isVerified(address: string): Promise<boolean> {
     const result = await this.verify(address);
     return result.verified;
+  }
+
+  /**
+   * Check if an address holds a valid attestation at or above the given tier.
+   * @param address - The wallet address to check
+   * @param tier - Minimum tier required (use the {@link TIER} constants)
+   * @returns True if verified and tier >= the requested tier
+   *
+   * @example
+   * ```typescript
+   * import { TIER } from "@kumply/sdk";
+   * const isBusiness = await client.hasTier("0x...", TIER.KYB);
+   * ```
+   */
+  async hasTier(address: string, tier: number): Promise<boolean> {
+    const result = await this.verify(address);
+    return result.verified && result.tier >= tier;
   }
 
   /**

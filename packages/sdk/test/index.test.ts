@@ -6,6 +6,8 @@ import {
   FUJI_CONFIG,
   MAINNET_CONFIG,
   TIER_DEFINITIONS,
+  TIER,
+  DEPLOYMENTS,
 } from '../src/index';
 import type {
   AttestationResult,
@@ -196,6 +198,69 @@ describe('@kumply/sdk', () => {
       });
       const tiers = await client.listTiers();
       expect(tiers).toHaveLength(5);
+    });
+
+    it('should expose network, chainId, contractAddress and publicClient', () => {
+      const client = new KumplyClient({
+        network: 'mainnet',
+        contractAddress: DEPLOYMENTS.mainnet.attestationStore,
+      });
+      expect(client.network).toBe('mainnet');
+      expect(client.chainId).toBe(43114);
+      expect(client.contractAddress).toBe(DEPLOYMENTS.mainnet.attestationStore);
+      expect(client.publicClient).toBeDefined();
+    });
+
+    it('should report fuji network and chainId', () => {
+      const client = new KumplyClient({
+        network: 'fuji',
+        contractAddress: DEPLOYMENTS.fuji.attestationStore,
+      });
+      expect(client.network).toBe('fuji');
+      expect(client.chainId).toBe(43113);
+    });
+
+    it('should expose hasTier as a method', () => {
+      const client = new KumplyClient({
+        network: 'fuji',
+        contractAddress: DEPLOYMENTS.fuji.attestationStore,
+      });
+      expect(typeof client.hasTier).toBe('function');
+    });
+  });
+
+  describe('TIER constants', () => {
+    it('should map the five tiers to contract values', () => {
+      expect(TIER.BASIC).toBe(1);
+      expect(TIER.STANDARD).toBe(2);
+      expect(TIER.ENHANCED).toBe(3);
+      expect(TIER.KYB).toBe(4);
+      expect(TIER.KYA).toBe(5);
+    });
+  });
+
+  describe('DEPLOYMENTS', () => {
+    it('should include mainnet and fuji deployments', () => {
+      expect(DEPLOYMENTS.mainnet).toBeDefined();
+      expect(DEPLOYMENTS.fuji).toBeDefined();
+    });
+
+    it('every address should be a checksummed 0x + 40 hex string', () => {
+      const all = [
+        DEPLOYMENTS.mainnet.attestationStore,
+        DEPLOYMENTS.mainnet.complianceGate,
+        DEPLOYMENTS.fuji.attestationStore,
+        DEPLOYMENTS.fuji.complianceGate,
+        DEPLOYMENTS.fuji.validatorSetManager,
+      ];
+      for (const addr of all) {
+        expect(addr).toMatch(/^0x[0-9a-fA-F]{40}$/);
+      }
+    });
+
+    it('mainnet and fuji stores should be distinct deployments', () => {
+      expect(DEPLOYMENTS.mainnet.attestationStore).not.toBe(DEPLOYMENTS.fuji.attestationStore);
+      expect(DEPLOYMENTS.mainnet.complianceGate).not.toBe(DEPLOYMENTS.fuji.complianceGate);
     });
   });
 });

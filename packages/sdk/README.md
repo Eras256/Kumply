@@ -24,32 +24,48 @@ pnpm add @kumply/sdk
 ## Quick start
 
 ```typescript
-import { KumplyClient } from "@kumply/sdk";
+import { KumplyClient, DEPLOYMENTS, TIER } from "@kumply/sdk";
 
 const client = new KumplyClient({
-  network: "fuji",
-  contractAddress: "0xYourAttestationStoreAddress",
+  network: "mainnet",
+  contractAddress: DEPLOYMENTS.mainnet.attestationStore,
 });
 
 // Check if a wallet is KYC-verified
 const result = await client.verify("0xUserAddress");
 
-if (result.verified && result.tier >= 2) {
+if (result.verified && result.tier >= TIER.STANDARD) {
   console.log("Standard KYC — allow deposit");
 } else {
   console.log("User needs verification");
 }
 ```
 
+## Live deployments (source-verified on Snowtrace)
+
+| Contract | Network | Address |
+|----------|---------|---------|
+| AttestationStore | Mainnet C-Chain | [`0xa116261Ed3a848A9E1cd34923D5A0442D1455F71`](https://snowtrace.io/address/0xa116261Ed3a848A9E1cd34923D5A0442D1455F71) |
+| ComplianceGate | Mainnet C-Chain | [`0x01BEEA13A485c7bAD58f926E345325e9e3773bEe`](https://snowtrace.io/address/0x01BEEA13A485c7bAD58f926E345325e9e3773bEe) |
+| AttestationStore | Fuji Testnet | [`0xa3Bc5564A18e107807aF41fF2a5215Db050b22dD`](https://testnet.snowtrace.io/address/0xa3Bc5564A18e107807aF41fF2a5215Db050b22dD) |
+| ComplianceGate | Fuji Testnet | [`0xcFDdeA5482baE9A6733B58F6a39FC36BCe6164cF`](https://testnet.snowtrace.io/address/0xcFDdeA5482baE9A6733B58F6a39FC36BCe6164cF) |
+
+All addresses ship in the SDK as the `DEPLOYMENTS` constant — no copy-pasting needed.
+Mainnet currently runs as a **read-only beta with `verificationFee = 0`**; the automated
+Sumsub KYC flow issues attestations on Fuji.
+
 ## API reference
 
 ### `new KumplyClient(options)`
 
-| Option            | Type     | Required | Description                                      |
-|-------------------|----------|----------|--------------------------------------------------|
-| `network`         | `string` | Yes      | `"fuji"` or `"mainnet"`                          |
-| `contractAddress` | `string` | Yes      | Deployed `AttestationStore` contract address     |
-| `rpcUrl`          | `string` | No       | Custom RPC URL (defaults to public Fuji/mainnet) |
+| Option            | Type     | Required | Description                                              |
+|-------------------|----------|----------|----------------------------------------------------------|
+| `network`         | `string` | Yes      | `"fuji"`, `"mainnet"`, or `"kumply-l1"`                  |
+| `contractAddress` | `string` | Yes      | `AttestationStore` address — use `DEPLOYMENTS.<network>` |
+| `rpcUrl`          | `string` | No       | Custom RPC URL (defaults to public Fuji/mainnet)         |
+
+Instances also expose `client.network`, `client.chainId` (43113 · 43114 · 43210),
+`client.contractAddress`, and `client.publicClient` (the underlying viem client, for advanced use).
 
 ### Methods
 
@@ -65,7 +81,17 @@ const { verified, tier, expiry } = await client.verify("0x...");
 
 Convenience wrapper — returns `true` if the address has a valid, non-expired attestation.
 
-#### `getTotalAttestations(): Promise<bigint>`
+#### `hasTier(address: string, tier: number): Promise<boolean>`
+
+Returns `true` if the address is verified **and** its tier is at or above the requested one.
+
+```typescript
+import { TIER } from "@kumply/sdk";
+
+const isBusiness = await client.hasTier("0x...", TIER.KYB); // tier >= 4
+```
+
+#### `getTotalAttestations(): Promise<number>`
 
 Total attestations ever issued by the contract.
 
@@ -88,6 +114,8 @@ Cumulative protocol revenue collected in wei.
 
 ```typescript
 import {
+  DEPLOYMENTS,            // Verified contract addresses per network (mainnet + fuji)
+  TIER,                   // { BASIC: 1, STANDARD: 2, ENHANCED: 3, KYB: 4, KYA: 5 }
   FUJI_CONFIG,            // { chainId: 43113, rpcUrl, name, explorerUrl }
   MAINNET_CONFIG,         // { chainId: 43114, rpcUrl, name, explorerUrl }
   TIER_DEFINITIONS,       // TierConfig[] — all 5 KYC tier descriptions
@@ -109,13 +137,13 @@ import {
 
 ## Networks
 
-| Network                  | Network ID    | Chain ID | Status        | Explorer                              |
-|--------------------------|---------------|----------|---------------|---------------------------------------|
-| Avalanche Fuji           | `fuji`        | 43113    | **Live**      | https://testnet.snowtrace.io          |
-| Avalanche C-Chain        | `mainnet`     | 43114    | Live          | https://snowtrace.io                  |
-| KUMPLY Compliance L1     | `kumply-l1`   | 43210    | Deploy-Ready  | https://kumply-l1.subnets.avax.network |
+| Network                  | Network ID    | Chain ID | Status                              | Explorer                     |
+|--------------------------|---------------|----------|-------------------------------------|------------------------------|
+| Avalanche C-Chain        | `mainnet`     | 43114    | **Live** (read-only beta, fee $0)   | https://snowtrace.io         |
+| Avalanche Fuji           | `fuji`        | 43113    | **Live** (full suite + automated KYC) | https://testnet.snowtrace.io |
+| KUMPLY Compliance L1     | `kumply-l1`   | 43210    | Registered on Fuji · validator activation pending | https://testnet.avascan.info |
 
-The **KUMPLY Compliance L1** is a custom Avalanche L1 (ACP-77 + ACP-99) where only KYB-verified institutions can validate. The contract, genesis, and deploy scripts are committed and tested — pending institutional validator commitments before going live. See [`L1.md`](https://github.com/KumplyProtocol/kumply/blob/main/L1.md) for the architectural rationale.
+The **KUMPLY Compliance L1** is a custom Avalanche L1 (ACP-77 + ACP-99) where only KYB-verified institutions can validate. The chain is registered on the Fuji P-Chain with its genesis committed; the ACP-99 `KumplyValidatorSetManager` is deployed and verified. See [kumply.xyz/l1](https://kumply.xyz/l1) for live status and [`contracts/l1/`](https://github.com/Eras256/Kumply/tree/main/contracts/l1) for the architecture.
 
 ## Using ABIs directly with viem
 

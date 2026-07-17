@@ -18,5 +18,7 @@ export {
   MAINNET_CONFIG,
   KUMPLY_L1_CONFIG,
   TIER_DEFINITIONS,
+  TIER,
+  DEPLOYMENTS,
   AVAX_DECIMALS,
 } from "./constants";
