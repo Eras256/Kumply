@@ -90,19 +90,21 @@ export default function DashboardPage() {
       const attestationEvent = parseAbiItem(
         "event AttestationIssued(address indexed subject, uint32 tier, uint64 expiry, address indexed verifier)"
       );
+      const startBlock = network === "mainnet" ? 90498000n : 57047000n;
       let logs;
       try {
         logs = await publicClient.getLogs({
           address: contractAddress,
           event: attestationEvent,
-          fromBlock: 0n,
+          fromBlock: startBlock,
         });
-      } catch {
+      } catch (err) {
+        console.warn("Log fetch failed from startBlock, trying fallback:", err);
         const latest = await publicClient.getBlockNumber();
         logs = await publicClient.getLogs({
           address: contractAddress,
           event: attestationEvent,
-          fromBlock: latest > 2000n ? latest - 2000n : 0n,
+          fromBlock: latest > 100000n ? latest - 100000n : 0n,
         });
       }
 
