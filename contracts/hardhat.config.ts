@@ -26,7 +26,13 @@ const config: HardhatUserConfig = {
     avalanche: {
       url: "https://api.avax.network/ext/bc/C/rpc",
       chainId: 43114,
-      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
+      // Mainnet uses its own key so the Fuji key never signs on mainnet
+      // (and vice versa). Falls back to DEPLOYER_PRIVATE_KEY if unset.
+      accounts: process.env.DEPLOYER_PRIVATE_KEY_MAINNET
+        ? [process.env.DEPLOYER_PRIVATE_KEY_MAINNET]
+        : process.env.DEPLOYER_PRIVATE_KEY
+          ? [process.env.DEPLOYER_PRIVATE_KEY]
+          : [],
     },
   },
   etherscan: {

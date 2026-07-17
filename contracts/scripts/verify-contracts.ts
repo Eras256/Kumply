@@ -18,24 +18,35 @@ dotenv.config({ path: "../.env" });
  *   - Contracts must be deployed and the network synced
  */
 
-import { run, ethers } from "hardhat";
+import { run, ethers, network } from "hardhat";
 
 async function main() {
-  const storeAddress = process.env.CONTRACT_ATTESTATION_STORE;
-  const gateAddress = process.env.CONTRACT_COMPLIANCE_GATE;
+  // Mainnet (--network avalanche) uses its own env vars and deployer key so
+  // constructor arguments match the actual deployment on each network.
+  const isMainnet = network.name === "avalanche";
+  const storeAddress = isMainnet
+    ? process.env.CONTRACT_ATTESTATION_STORE_MAINNET
+    : process.env.CONTRACT_ATTESTATION_STORE;
+  const gateAddress = isMainnet
+    ? process.env.CONTRACT_COMPLIANCE_GATE_MAINNET
+    : process.env.CONTRACT_COMPLIANCE_GATE;
+  const suffix = isMainnet ? "_MAINNET" : "";
 
   if (!storeAddress || !gateAddress) {
-    throw new Error("CONTRACT_ATTESTATION_STORE and CONTRACT_COMPLIANCE_GATE must be set in .env");
+    throw new Error(`CONTRACT_ATTESTATION_STORE${suffix} and CONTRACT_COMPLIANCE_GATE${suffix} must be set in .env`);
   }
 
   // Derive deployer address from private key — same key used at deploy time
+  const privateKey = isMainnet
+    ? process.env.DEPLOYER_PRIVATE_KEY_MAINNET || process.env.DEPLOYER_PRIVATE_KEY
+    : process.env.DEPLOYER_PRIVATE_KEY;
   let deployerAddress: string;
-  if (process.env.DEPLOYER_PRIVATE_KEY) {
-    const wallet = new ethers.Wallet(process.env.DEPLOYER_PRIVATE_KEY);
+  if (privateKey) {
+    const wallet = new ethers.Wallet(privateKey);
     deployerAddress = wallet.address;
   } else {
     throw new Error(
-      "DEPLOYER_PRIVATE_KEY must be set in .env to derive the deployer address for constructor argument verification."
+      `DEPLOYER_PRIVATE_KEY${suffix} must be set in .env to derive the deployer address for constructor argument verification.`
     );
   }
 
@@ -83,10 +94,11 @@ async function main() {
     }
   }
 
+  const explorerBase = isMainnet ? "https://snowtrace.io" : "https://testnet.snowtrace.io";
   console.log("═══════════════════════════════════════════");
   console.log("  Verification Complete");
-  console.log(`  AttestationStore: https://testnet.snowtrace.io/address/${storeAddress}`);
-  console.log(`  ComplianceGate:   https://testnet.snowtrace.io/address/${gateAddress}`);
+  console.log(`  AttestationStore: ${explorerBase}/address/${storeAddress}`);
+  console.log(`  ComplianceGate:   ${explorerBase}/address/${gateAddress}`);
   console.log("═══════════════════════════════════════════");
 }
 

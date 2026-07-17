@@ -7,8 +7,10 @@ import { useAccount, useDisconnect } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import Image from "next/image";
 import KumplyLogo from "@/app/images/KumplyLogo.png";
+import { useKumplyNetwork } from "@/providers/KumplyNetworkProvider";
 
 export function Navbar() {
+  const { network, setNetwork } = useKumplyNetwork();
   const t = useTranslations('Navbar');
   const locale = useLocale();
   const router = useRouter();
@@ -116,6 +118,20 @@ export function Navbar() {
 
             <div className="navbar__divider" />
 
+            {/* NETWORK SWITCHER */}
+            <div className="navbar__lang" style={{ marginRight: "0.5rem" }}>
+              <button
+                onClick={() => setNetwork("fuji")}
+                className={`navbar__lang-btn ${network === "fuji" ? "navbar__lang-btn--active" : ""}`}
+                style={network === "fuji" ? { color: "var(--accent)", fontWeight: 700 } : {}}
+              >FUJI</button>
+              <button
+                onClick={() => setNetwork("mainnet")}
+                className={`navbar__lang-btn ${network === "mainnet" ? "navbar__lang-btn--active" : ""}`}
+                style={network === "mainnet" ? { color: "var(--accent)", fontWeight: 700 } : {}}
+              >MAINNET</button>
+            </div>
+
             {/* LANGUAGE SWITCHER */}
             <div className="navbar__lang">
               <button
@@ -221,6 +237,20 @@ export function Navbar() {
           </div>
 
           <div className="navbar__mobile-divider" />
+
+          {/* MOBILE NETWORK SWITCHER */}
+          <div className="navbar__mobile-lang" style={{ marginBottom: "1rem" }}>
+            <button
+              onClick={() => { setNetwork("fuji"); closeMenu(); }}
+              className={`navbar__lang-btn navbar__lang-btn--lg ${network === "fuji" ? "navbar__lang-btn--active" : ""}`}
+              style={network === "fuji" ? { color: "var(--accent)", fontWeight: 700 } : {}}
+            >FUJI</button>
+            <button
+              onClick={() => { setNetwork("mainnet"); closeMenu(); }}
+              className={`navbar__lang-btn navbar__lang-btn--lg ${network === "mainnet" ? "navbar__lang-btn--active" : ""}`}
+              style={network === "mainnet" ? { color: "var(--accent)", fontWeight: 700 } : {}}
+            >MAINNET</button>
+          </div>
 
           {/* MOBILE LANGUAGE SWITCHER */}
           <div className="navbar__mobile-lang">

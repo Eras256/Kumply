@@ -2,10 +2,11 @@
 
 import { type ReactNode } from "react";
 import { WagmiProvider } from "wagmi";
-import { avalancheFuji } from "wagmi/chains";
+import { avalancheFuji, avalanche } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
+import { KumplyNetworkProvider } from "./KumplyNetworkProvider";
 
 const queryClient = new QueryClient();
 
@@ -22,7 +23,7 @@ const metadata = {
   icons: ["https://kumply.xyz/logo.png"],
 };
 
-const networks = [avalancheFuji] as any;
+const networks = [avalancheFuji, avalanche] as any;
 
 const wagmiAdapter = new WagmiAdapter({
   networks,
@@ -45,7 +46,9 @@ export function Web3Provider({ children }: { children: ReactNode }) {
   return (
     <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        {children}
+        <KumplyNetworkProvider>
+          {children}
+        </KumplyNetworkProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

@@ -5,11 +5,9 @@ import { useAccount } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { useTranslations } from "next-intl";
 import { createPublicClient, http, parseAbiItem } from "viem";
-import { avalancheFuji } from "viem/chains";
+import { avalancheFuji, avalanche } from "viem/chains";
 import { KumplyClient, ATTESTATION_STORE_ABI } from "@kumply/sdk";
-
-const CONTRACT = (process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76") as `0x${string}`;
-const EXPLORER = "https://testnet.snowtrace.io";
+import { useKumplyNetwork } from "@/providers/KumplyNetworkProvider";
 
 const TIER_COLORS: Record<number, string> = {
   1: "var(--text-secondary)",
@@ -47,6 +45,7 @@ export default function DashboardPage() {
   const t = useTranslations("Dashboard");
   const { address, isConnected } = useAccount();
   const { open } = useAppKit();
+  const { network, contractAddress, rpcUrl } = useKumplyNetwork();
 
   const [events, setEvents] = useState<AttestationEvent[]>([]);
   const [totalAttestations, setTotalAttestations] = useState<number | null>(null);
@@ -59,22 +58,23 @@ export default function DashboardPage() {
   const [lookupLoading, setLookupLoading] = useState(false);
   const [tierStats, setTierStats] = useState<Record<number, number>>({});
 
+  const chain = network === "mainnet" ? avalanche : avalancheFuji;
+  const explorerUrl = network === "mainnet" ? "https://snowtrace.io" : "https://testnet.snowtrace.io";
+
   const publicClient = useMemo(
     () =>
       createPublicClient({
-        chain: avalancheFuji,
-        transport: http(
-          process.env.NEXT_PUBLIC_FUJI_RPC_URL || "https://api.avax-test.network/ext/bc/C/rpc"
-        ),
+        chain,
+        transport: http(rpcUrl),
       }),
-    []
+    [chain, rpcUrl]
   );
 
   const fetchDashboardData = useCallback(async () => {
-    if (!CONTRACT) return;
+    if (!contractAddress) return;
     setLoading(true);
     try {
-      const kumplyClient = new KumplyClient({ network: "fuji", contractAddress: CONTRACT });
+      const kumplyClient = new KumplyClient({ network, contractAddress });
       const [total, fee, collected] = await Promise.all([
         kumplyClient.getTotalAttestations(),
         kumplyClient.getVerificationFee(),
@@ -84,16 +84,27 @@ export default function DashboardPage() {
       setVerificationFee(fee);
       setTotalFeesCollected(collected);
 
-      // Read from block 0 to capture all historical attestations
-      const fromBlock = 0n;
-
-      const logs = await publicClient.getLogs({
-        address: CONTRACT,
-        event: parseAbiItem(
-          "event AttestationIssued(address indexed subject, uint32 tier, uint64 expiry, address indexed verifier)"
-        ),
-        fromBlock,
-      });
+      // Read from block 0 to capture all historical attestations. Public RPCs
+      // reject unbounded ranges on C-Chain mainnet, so fall back to the most
+      // recent ~2048 blocks if the full-range query is refused.
+      const attestationEvent = parseAbiItem(
+        "event AttestationIssued(address indexed subject, uint32 tier, uint64 expiry, address indexed verifier)"
+      );
+      let logs;
+      try {
+        logs = await publicClient.getLogs({
+          address: contractAddress,
+          event: attestationEvent,
+          fromBlock: 0n,
+        });
+      } catch {
+        const latest = await publicClient.getBlockNumber();
+        logs = await publicClient.getLogs({
+          address: contractAddress,
+          event: attestationEvent,
+          fromBlock: latest > 2000n ? latest - 2000n : 0n,
+        });
+      }
 
       const parsed: AttestationEvent[] = logs
         .slice(-50) // last 50 events
@@ -120,7 +131,7 @@ export default function DashboardPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [contractAddress, network, publicClient]);
 
   useEffect(() => {
     fetchDashboardData();
@@ -138,7 +149,7 @@ export default function DashboardPage() {
     setLookupError(null);
     setLookupResult(null);
     try {
-      const client = new KumplyClient({ network: "fuji", contractAddress: CONTRACT });
+      const client = new KumplyClient({ network, contractAddress });
       const result = await client.verify(addr);
       setLookupResult(result);
     } catch {
@@ -375,7 +386,7 @@ export default function DashboardPage() {
 
           <div className="dashboard-actions">
             <a
-              href={`${EXPLORER}/address/${CONTRACT}`}
+              href={`${explorerUrl}/address/${contractAddress}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary"
@@ -435,7 +446,7 @@ export default function DashboardPage() {
                     onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
                   >
                     <td style={{ padding: "0.75rem", fontFamily: "monospace", color: "var(--text-primary)" }}>
-                      <a href={`${EXPLORER}/address/${ev.subject}`} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent-light)", textDecoration: "none" }}>
+                      <a href={`${explorerUrl}/address/${ev.subject}`} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent-light)", textDecoration: "none" }}>
                         {shortAddr(ev.subject)}
                       </a>
                     </td>
@@ -448,7 +459,7 @@ export default function DashboardPage() {
                       {formatDate(Number(ev.expiry))}
                     </td>
                     <td style={{ padding: "0.75rem", fontFamily: "monospace" }}>
-                      <a href={`${EXPLORER}/tx/${ev.txHash}`} target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-tertiary)", textDecoration: "none", fontSize: "0.8rem" }}>
+                      <a href={`${explorerUrl}/tx/${ev.txHash}`} target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-tertiary)", textDecoration: "none", fontSize: "0.8rem" }}>
                         {shortAddr(ev.txHash)} ↗
                       </a>
                     </td>

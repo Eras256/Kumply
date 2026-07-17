@@ -14,6 +14,8 @@
     "test:e2e": "pnpm --filter web test:e2e",
     "seed:fuji": "cd contracts && npx hardhat run scripts/seed-fuji.ts --network fuji",
     "deploy:fuji": "cd contracts && npx hardhat run scripts/deploy.ts --network fuji",
+    "deploy:mainnet": "cd contracts && npx hardhat run scripts/deploy.ts --network avalanche",
+    "verify:mainnet": "cd contracts && npx hardhat run scripts/verify-contracts.ts --network avalanche",
     "lint": "pnpm -r lint",
     "format": "pnpm -r format"
   },

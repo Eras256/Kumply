@@ -6,10 +6,7 @@ import { useAccount } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { Link } from "@/i18n/routing";
 import { KumplyClient } from "@kumply/sdk";
-
-const CONTRACT = (process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76") as `0x${string}`;
-const COMPLIANCE_GATE = (process.env.NEXT_PUBLIC_CONTRACT_COMPLIANCE_GATE || "0x3Bf8F8ea2573Eb3f386aDF72D191869c4827062B") as `0x${string}`;
-const EXPLORER = "https://testnet.snowtrace.io";
+import { useKumplyNetwork } from "@/providers/KumplyNetworkProvider";
 
 const TIER_COLORS: Record<number, string> = {
   0: "var(--text-tertiary)",
@@ -83,6 +80,9 @@ export default function DemoPage() {
   const t = useTranslations("Demo");
   const { address: connectedAddress, isConnected } = useAccount();
   const { open } = useAppKit();
+  const { network, contractAddress, complianceGateAddress } = useKumplyNetwork();
+  const explorerUrl = network === "mainnet" ? "https://snowtrace.io" : "https://testnet.snowtrace.io";
+
   const [selectedUseCase, setSelectedUseCase] = useState(USE_CASES[0]);
   const [customAddress, setCustomAddress] = useState("");
   const [customRequiredTier, setCustomRequiredTier] = useState(2);
@@ -92,8 +92,8 @@ export default function DemoPage() {
   const [error, setError] = useState<string | null>(null);
 
   async function runCheck(addresses: string[], requiredTier: number, labels: string[]) {
-    if (!CONTRACT) {
-      setError("Contract address not configured. Check NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE.");
+    if (!contractAddress) {
+      setError("Contract address not configured.");
       return;
     }
     setLoading(true);
@@ -102,7 +102,7 @@ export default function DemoPage() {
     setResultLabels(labels);
 
     try {
-      const client = new KumplyClient({ network: "fuji", contractAddress: CONTRACT });
+      const client = new KumplyClient({ network, contractAddress });
       const checks = await Promise.all(
         addresses.map(async (addr): Promise<CheckResult> => {
           try {
@@ -181,11 +181,11 @@ export default function DemoPage() {
               {t("gateDesc")}
             </p>
             <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-              <a href={`${EXPLORER}/address/${CONTRACT}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.78rem", color: "var(--accent-light)", textDecoration: "none", fontFamily: "monospace", background: "var(--bg-secondary)", padding: "0.3rem 0.75rem", borderRadius: "var(--radius-sm)", border: "1px solid var(--border)" }}>
+              <a href={`${explorerUrl}/address/${contractAddress}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.78rem", color: "var(--accent-light)", textDecoration: "none", fontFamily: "monospace", background: "var(--bg-secondary)", padding: "0.3rem 0.75rem", borderRadius: "var(--radius-sm)", border: "1px solid var(--border)" }}>
                 AttestationStore ↗
               </a>
-              {COMPLIANCE_GATE && (
-                <a href={`${EXPLORER}/address/${COMPLIANCE_GATE}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.78rem", color: "var(--accent-light)", textDecoration: "none", fontFamily: "monospace", background: "var(--bg-secondary)", padding: "0.3rem 0.75rem", borderRadius: "var(--radius-sm)", border: "1px solid var(--border)" }}>
+              {complianceGateAddress && complianceGateAddress !== "0x0000000000000000000000000000000000000000" && (
+                <a href={`${explorerUrl}/address/${complianceGateAddress}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.78rem", color: "var(--accent-light)", textDecoration: "none", fontFamily: "monospace", background: "var(--bg-secondary)", padding: "0.3rem 0.75rem", borderRadius: "var(--radius-sm)", border: "1px solid var(--border)" }}>
                   ComplianceGate ↗
                 </a>
               )}

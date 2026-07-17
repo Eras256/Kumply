@@ -6,7 +6,9 @@
     "compile": "hardhat compile",
     "test": "hardhat test",
     "deploy:fuji": "hardhat run scripts/deploy.ts --network fuji",
+    "deploy:mainnet": "hardhat run scripts/deploy.ts --network avalanche",
     "verify:fuji": "hardhat run scripts/verify-contracts.ts --network fuji",
+    "verify:mainnet": "hardhat run scripts/verify-contracts.ts --network avalanche",
     "seed:fuji": "hardhat run scripts/seed-fuji.ts --network fuji"
   },
   "devDependencies": {

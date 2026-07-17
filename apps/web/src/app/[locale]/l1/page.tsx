@@ -1,17 +1,7 @@
-import { useTranslations } from "next-intl";
+"use client";
 
-// ── KUMPLY Compliance L1 — Deploy-Ready configuration ──────────────
-const L1_CHAIN_ID         = process.env.NEXT_PUBLIC_KUMPLY_L1_CHAIN_ID || "43210";
-const L1_NAME             = "KUMPLY Compliance L1";
-const L1_SYMBOL           = "KMP";
-const L1_VM               = "Subnet-EVM v0.7.0";
-const L1_BLOCK_TIME       = "2s";
-const L1_RPC_URL          = "Available after validator activation (ACP-77 conversion pending)";
-const L1_EXPLORER         = "https://testnet.avascan.info/blockchain/p/tx/2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b";
-const SUBNET_ID           = process.env.NEXT_PUBLIC_KUMPLY_L1_SUBNET_ID || "2buHAwNvaybnQ6vQYRS4TeXizZhAo33bhpnonAJu21CKYLZoST";
-const BLOCKCHAIN_ID       = process.env.NEXT_PUBLIC_KUMPLY_L1_BLOCKCHAIN_ID || "2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b";
-const ATTESTATION_STORE   = process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76";
-const VALIDATOR_SET_MANAGER = process.env.NEXT_PUBLIC_CONTRACT_VALIDATOR_SET_MANAGER || "0x903f6E46f965C9A1127652D761400dBe487F555D";
+import { useTranslations } from "next-intl";
+import { useKumplyNetwork } from "@/providers/KumplyNetworkProvider";
 
 // Founding validator slots (KYB-gated — each must hold a Tier 4 attestation)
 const FOUNDING_VALIDATORS = [
@@ -57,6 +47,20 @@ function Row({ label, value, mono = true, href }: { label: string; value: string
 
 export default function L1Page() {
   const t = useTranslations('L1');
+  const { network, contractAddress } = useKumplyNetwork();
+
+  const L1_CHAIN_ID         = process.env.NEXT_PUBLIC_KUMPLY_L1_CHAIN_ID || "43210";
+  const L1_NAME             = "KUMPLY Compliance L1";
+  const L1_SYMBOL           = "KMP";
+  const L1_VM               = "Subnet-EVM v0.7.0";
+  const L1_BLOCK_TIME       = "2s";
+  const L1_RPC_URL          = "Available after validator activation (ACP-77 conversion pending)";
+  const L1_EXPLORER         = "https://testnet.avascan.info/blockchain/p/tx/2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b";
+  const SUBNET_ID           = process.env.NEXT_PUBLIC_KUMPLY_L1_SUBNET_ID || "2buHAwNvaybnQ6vQYRS4TeXizZhAo33bhpnonAJu21CKYLZoST";
+  const BLOCKCHAIN_ID       = process.env.NEXT_PUBLIC_KUMPLY_L1_BLOCKCHAIN_ID || "2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b";
+  const VALIDATOR_SET_MANAGER = process.env.NEXT_PUBLIC_CONTRACT_VALIDATOR_SET_MANAGER || "0x903f6E46f965C9A1127652D761400dBe487F555D";
+
+  const snowtraceBase = network === "mainnet" ? "https://snowtrace.io" : "https://testnet.snowtrace.io";
 
   return (
     <div className="container l1-container">
@@ -115,11 +119,11 @@ export default function L1Page() {
             </li>
             <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '0.85rem 0', borderBottom: '1px solid var(--border)', gap: '1rem' }}>
               <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', flexShrink: 0 }}>AttestationStore</span>
-              <a href={`https://testnet.snowtrace.io/address/${ATTESTATION_STORE}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-all', textAlign: 'right', textDecoration: 'underline' }}>{ATTESTATION_STORE} ↗</a>
+              <a href={`${snowtraceBase}/${contractAddress}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-all', textAlign: 'right', textDecoration: 'underline' }}>{contractAddress} ↗</a>
             </li>
             <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '0.85rem 0', borderBottom: '1px solid var(--border)', gap: '1rem' }}>
               <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', flexShrink: 0 }}>{t('validatorSetMgr')}</span>
-              <a href={`https://testnet.snowtrace.io/address/${VALIDATOR_SET_MANAGER}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-all', textAlign: 'right', textDecoration: 'underline' }}>{VALIDATOR_SET_MANAGER} ↗</a>
+              <a href={`${snowtraceBase}/${VALIDATOR_SET_MANAGER}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontFamily: 'monospace', fontSize: '0.85rem', wordBreak: 'break-all', textAlign: 'right', textDecoration: 'underline' }}>{VALIDATOR_SET_MANAGER} ↗</a>
             </li>
             <Row label="Warp / ICM" value={t('enabled')} mono={false} />
             <Row label="ICTT" value={t('plannedPhase2')} mono={false} />

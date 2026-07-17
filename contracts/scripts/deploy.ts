@@ -40,9 +40,11 @@ async function main() {
   console.log("  Admin:          ", deployer.address);
   console.log("  Network:        ", (await ethers.provider.getNetwork()).chainId.toString());
   console.log("═══════════════════════════════════════════");
+  const chainId = (await ethers.provider.getNetwork()).chainId;
+  const suffix = chainId === 43114n ? "_MAINNET" : "";
   console.log("\nUpdate your .env with:");
-  console.log(`  CONTRACT_ATTESTATION_STORE=${storeAddress}`);
-  console.log(`  CONTRACT_COMPLIANCE_GATE=${gateAddress}`);
+  console.log(`  CONTRACT_ATTESTATION_STORE${suffix}=${storeAddress}`);
+  console.log(`  CONTRACT_COMPLIANCE_GATE${suffix}=${gateAddress}`);
 }
 
 main().catch((error) => {

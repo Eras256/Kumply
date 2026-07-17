@@ -1,12 +1,17 @@
-import { useTranslations } from "next-intl";
+"use client";
 
-const ATTESTATION_STORE = process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76";
-const COMPLIANCE_GATE   = process.env.NEXT_PUBLIC_CONTRACT_COMPLIANCE_GATE || "0x3Bf8F8ea2573Eb3f386aDF72D191869c4827062B";
-const VERIFIER_ADDRESS  = process.env.NEXT_PUBLIC_VERIFIER_ADDRESS || "0xD65042534CE80fcb641fd6Eb99a16eBF6C0cd076";
-const SNOWTRACE_BASE    = "https://testnet.snowtrace.io/address";
+import { useTranslations } from "next-intl";
+import { useKumplyNetwork } from "@/providers/KumplyNetworkProvider";
 
 export default function NetworkPage() {
   const t = useTranslations('Network');
+  const { network, contractAddress, complianceGateAddress, rpcUrl, chainId } = useKumplyNetwork();
+  
+  const verifierAddress = process.env.NEXT_PUBLIC_VERIFIER_ADDRESS || "0xD65042534CE80fcb641fd6Eb99a16eBF6C0cd076";
+  const snowtraceBase = network === "mainnet" 
+    ? "https://snowtrace.io/address" 
+    : "https://testnet.snowtrace.io/address";
+  const networkLabel = network === "mainnet" ? "Avalanche Mainnet" : "Avalanche Fuji Testnet";
 
   return (
     <div className="container" style={{ paddingTop: '2rem', paddingBottom: '5rem' }}>
@@ -30,15 +35,15 @@ export default function NetworkPage() {
             </li>
             <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.85rem 0', borderBottom: '1px solid var(--border)' }}>
               <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{t('chainId')}</span>
-              <code style={{ color: 'var(--text-primary)', fontFamily: 'monospace', fontSize: '0.9rem', background: 'var(--bg-secondary)', padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-sm)' }}>43113</code>
+              <code style={{ color: 'var(--text-primary)', fontFamily: 'monospace', fontSize: '0.9rem', background: 'var(--bg-secondary)', padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-sm)' }}>{chainId}</code>
             </li>
             <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '0.85rem 0', borderBottom: '1px solid var(--border)', gap: '1rem' }}>
               <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', flexShrink: 0 }}>{t('rpcUrl')}</span>
-              <code style={{ color: 'var(--text-primary)', fontFamily: 'monospace', fontSize: '0.75rem', wordBreak: 'break-all', textAlign: 'right' }}>https://api.avax-test.network/ext/bc/C/rpc</code>
+              <code style={{ color: 'var(--text-primary)', fontFamily: 'monospace', fontSize: '0.75rem', wordBreak: 'break-all', textAlign: 'right' }}>{rpcUrl}</code>
             </li>
             <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.85rem 0' }}>
               <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Currency</span>
-              <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.9rem' }}>AVAX</span>
+              <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.9rem' }}>{network === "mainnet" ? "AVAX" : "AVAX"}</span>
             </li>
           </ul>
         </div>
@@ -84,7 +89,7 @@ export default function NetworkPage() {
           </div>
           <span className="badge badge-success">
             <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'currentColor', display: 'inline-block' }}></span>
-            Live on Fuji
+            Live on {network === "mainnet" ? "Mainnet" : "Fuji"}
           </span>
         </div>
 
@@ -93,27 +98,27 @@ export default function NetworkPage() {
           <div style={{ padding: '1rem 0', borderBottom: '1px solid var(--border)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
               <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{t('attestationStore')}</span>
-              <a href={`${SNOWTRACE_BASE}/${ATTESTATION_STORE}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-light)' }}>{t('viewOnSnowtr')}</a>
+              <a href={`${snowtraceBase}/${contractAddress}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-light)' }}>{t('viewOnSnowtr')}</a>
             </div>
-            <code style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: 'var(--text-primary)', wordBreak: 'break-all', display: 'block', background: 'var(--bg-secondary)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>{ATTESTATION_STORE}</code>
+            <code style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: 'var(--text-primary)', wordBreak: 'break-all', display: 'block', background: 'var(--bg-secondary)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>{contractAddress}</code>
           </div>
 
           {/* ComplianceGate */}
           <div style={{ padding: '1rem 0', borderBottom: '1px solid var(--border)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
               <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{t('complianceGate')}</span>
-              <a href={`${SNOWTRACE_BASE}/${COMPLIANCE_GATE}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-light)' }}>{t('viewOnSnowtr')}</a>
+              <a href={`${snowtraceBase}/${complianceGateAddress}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-light)' }}>{t('viewOnSnowtr')}</a>
             </div>
-            <code style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: 'var(--text-primary)', wordBreak: 'break-all', display: 'block', background: 'var(--bg-secondary)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>{COMPLIANCE_GATE}</code>
+            <code style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: 'var(--text-primary)', wordBreak: 'break-all', display: 'block', background: 'var(--bg-secondary)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>{complianceGateAddress}</code>
           </div>
 
           {/* Verifier */}
           <div style={{ padding: '1rem 0' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
               <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{t('verifierAddress')}</span>
-              <a href={`${SNOWTRACE_BASE}/${VERIFIER_ADDRESS}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-light)' }}>{t('viewOnSnowtr')}</a>
+              <a href={`${snowtraceBase}/${verifierAddress}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-light)' }}>{t('viewOnSnowtr')}</a>
             </div>
-            <code style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: 'var(--text-primary)', wordBreak: 'break-all', display: 'block', background: 'var(--bg-secondary)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>{VERIFIER_ADDRESS}</code>
+            <code style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: 'var(--text-primary)', wordBreak: 'break-all', display: 'block', background: 'var(--bg-secondary)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>{verifierAddress}</code>
           </div>
         </div>
       </div>

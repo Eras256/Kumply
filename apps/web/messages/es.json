@@ -112,6 +112,8 @@
     "verifyError": "Error de verificación",
     "launchError": "No se pudo iniciar el proceso de verificación",
     "testnetWarning": "Solo Fuji Testnet — no apto para uso en producción",
+    "mainnetKycNotice": "La verificación KYC automática por ahora emite credenciales solo en Fuji Testnet. Las credenciales en Mainnet se emiten manualmente durante la beta. Cambia a Fuji para completar una verificación automática.",
+    "switchToFujiBtn": "Cambiar a Fuji Testnet",
     "kycExplainer": "Completa la verificación de identidad a continuación. Tus datos personales son procesados de forma segura por Sumsub y KUMPLY nunca los almacena.",
     "connectedBadge": "Conectado"
   },

@@ -6,10 +6,9 @@ import { useAccount } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { useLocale, useTranslations } from "next-intl";
 import { KumplyClient } from "@kumply/sdk";
+import { useKumplyNetwork } from "@/providers/KumplyNetworkProvider";
 
 type VerifyStep = "connect" | "tierSelect" | "kyc" | "pending" | "done" | "error";
-
-const ATTESTATION_STORE = (process.env.NEXT_PUBLIC_CONTRACT_ATTESTATION_STORE || "0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76") as `0x${string}`;
 
 const TIER_OPTIONS = [
   { levelName: "basic-kyc",    tier: 1, recommended: false, icon: "🔵" },
@@ -26,6 +25,9 @@ export default function VerifyPage() {
   const searchParams = useSearchParams();
   const { address, isConnected } = useAccount();
   const { open } = useAppKit();
+  const { network, setNetwork, contractAddress } = useKumplyNetwork();
+  const explorerUrl = network === "mainnet" ? "https://snowtrace.io" : "https://testnet.snowtrace.io";
+
   const [step, setStep] = useState<VerifyStep>("connect");
   const validLevels = ["basic-kyc", "standard-kyc", "enhanced-kyc", "business-kyb", "agent-kya"];
   const levelParam = searchParams.get("level") ?? "";
@@ -45,9 +47,9 @@ export default function VerifyPage() {
   }[tier] ?? "");
 
   const checkExistingAttestation = useCallback(async () => {
-    if (!address || !ATTESTATION_STORE) { setStep("tierSelect"); return; }
+    if (!address || !contractAddress) { setStep("tierSelect"); return; }
     try {
-      const client = new KumplyClient({ network: "fuji", contractAddress: ATTESTATION_STORE });
+      const client = new KumplyClient({ network, contractAddress });
       const result = await client.verify(address);
       if (result.verified) {
         setAttestation({ tier: result.tier, expiry: result.expiry });
@@ -58,7 +60,7 @@ export default function VerifyPage() {
     } catch {
       setStep("tierSelect");
     }
-  }, [address]);
+  }, [address, network, contractAddress]);
 
   useEffect(() => {
     if (isConnected && step === "connect") {
@@ -68,6 +70,13 @@ export default function VerifyPage() {
 
   async function launchSumsub() {
     if (!address || sdkLaunchedRef.current) return;
+    // Automated attestations are only issued on Fuji — the Sumsub webhook
+    // writes to the Fuji AttestationStore. Mainnet attestations are manual.
+    if (network === "mainnet") {
+      setError(t("mainnetKycNotice"));
+      setStep("tierSelect");
+      return;
+    }
     setError(null);
     sdkLaunchedRef.current = true;
     setSdkLaunched(true);
@@ -124,8 +133,8 @@ export default function VerifyPage() {
   }
 
   async function pollAttestation(addr: string, retries: number, intervalMs: number) {
-    if (!ATTESTATION_STORE) { setError(t("pollError")); setStep("error"); return; }
-    const client = new KumplyClient({ network: "fuji", contractAddress: ATTESTATION_STORE });
+    if (!contractAddress) { setError(t("pollError")); setStep("error"); return; }
+    const client = new KumplyClient({ network, contractAddress });
     for (let i = 0; i < retries; i++) {
       await new Promise((r) => setTimeout(r, intervalMs));
       try {
@@ -230,15 +239,30 @@ export default function VerifyPage() {
             })}
           </div>
 
-          <div style={{ textAlign: "center" }}>
-            <button
-              className="btn btn-primary"
-              style={{ fontSize: "1rem", padding: "0.85rem 2.5rem" }}
-              onClick={() => { setStep("kyc"); launchSumsub(); }}
-            >
-              {t("tierSelectBtn")}
-            </button>
-          </div>
+          {network === "mainnet" ? (
+            <div style={{ textAlign: "center" }}>
+              <div style={{ margin: "0 auto 1.25rem", maxWidth: "560px", padding: "1rem 1.25rem", background: "var(--bg-secondary)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", color: "var(--text-secondary)", fontSize: "0.875rem", lineHeight: 1.6 }}>
+                {t("mainnetKycNotice")}
+              </div>
+              <button
+                className="btn btn-primary"
+                style={{ fontSize: "1rem", padding: "0.85rem 2.5rem" }}
+                onClick={() => setNetwork("fuji")}
+              >
+                {t("switchToFujiBtn")}
+              </button>
+            </div>
+          ) : (
+            <div style={{ textAlign: "center" }}>
+              <button
+                className="btn btn-primary"
+                style={{ fontSize: "1rem", padding: "0.85rem 2.5rem" }}
+                onClick={() => { setStep("kyc"); launchSumsub(); }}
+              >
+                {t("tierSelectBtn")}
+              </button>
+            </div>
+          )}
         </div>
       )}
 
@@ -327,7 +351,7 @@ export default function VerifyPage() {
             ))}
           </div>
 
-          <a href={`https://testnet.snowtrace.io/address/${ATTESTATION_STORE}`} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+          <a href={`${explorerUrl}/address/${contractAddress}`} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
             {t("snowtraceBtn")}
           </a>
         </div>
