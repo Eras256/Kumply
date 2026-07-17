@@ -61,3 +61,6 @@ update_docs.py
 *_paths.txt
 missing_in_*.txt
 .env*
+
+# Internal legal analysis — never commit
+KumplyMainnet.md
