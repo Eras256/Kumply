@@ -114,6 +114,12 @@ Al finalizar **cualquier tarea significativa**, es TU OBLIGACIÓN actualizar:
 ### ⚠ Reglas de narrativa para aplicaciones/grants
 - **Hackathon LatAm Institucional:** YA TERMINÓ y NO ganamos — NO citarlo como vigente ni como "candidato".
 - **Retro9000:** es para **mainnet** — enfocar hacia llevar KUMPLY de Fuji a mainnet. KUMPLY sigue en testnet.
+- **Team1 / Blizzard Fund ($10,000 USD Proposal):** Estructura modular "Sized for Discretion" ($5K para M1-M2, $7K para M1-M3, $10K para total).
+  - **M1 ($1,500):** Hardening de seguridad de `AttestationStore` + `ComplianceGate`.
+  - **M2 ($3,500):** Activación de producción de Sumsub + KYC reales.
+  - **M3 ($2,000):** Core contracts en Mainnet C-Chain (fee=0, SDK en npm).
+  - **M4 ($3,000):** Validador en Fuji L1, integración ICM, 2 pilotos.
+  - Excluye auditoría de validador L1 (para Retro9000). Sin custodia de fondos en Mainnet.
 - Pitch aprobado: compliance/identidad como primitiva componible cross-L1 (no SaaS amurallado); KUMPLY = infra reutilizable (SDK + contratos). Usar términos: ACP-99/KYB gating, ICM, ACP-77.
 
 ---
