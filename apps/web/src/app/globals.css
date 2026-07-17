@@ -128,7 +128,8 @@
 
 [data-theme="light"] .navbar__logo-img,
 [data-theme="light"] .footer__logo-img {
-  mix-blend-mode: screen;
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: multiply;
 }
 
 /* ──────────────────────────────────────────────────────────────
