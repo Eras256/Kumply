@@ -101,6 +101,60 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ── Live Contracts ── */}
+      <section id="contracts" aria-labelledby="contracts-title" className="container section">
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h2 id="contracts-title" className="section-title">{h('contractsSectionTitle')}</h2>
+          <p className="section-subtitle" style={{ margin: '0 auto' }}>{h('contractsSectionSubtitle')}</p>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', maxWidth: '900px', margin: '0 auto' }}>
+          {[
+            {
+              label: h('contractsMainnet'),
+              badge: 'chainId 43114',
+              note: h('contractsBeta'),
+              accent: 'var(--success)',
+              base: 'https://snowtrace.io/address',
+              store: '0xa116261Ed3a848A9E1cd34923D5A0442D1455F71',
+              gate: '0x01BEEA13A485c7bAD58f926E345325e9e3773bEe',
+            },
+            {
+              label: h('contractsFuji'),
+              badge: 'chainId 43113',
+              note: 'Full KYC/KYB/KYA demo flow',
+              accent: 'var(--accent)',
+              base: 'https://testnet.snowtrace.io/address',
+              store: '0xa3Bc5564A18e107807aF41fF2a5215Db050b22dD',
+              gate: '0xcFDdeA5482baE9A6733B58F6a39FC36BCe6164cF',
+            },
+          ].map((net) => (
+            <div key={net.label} className="glass-card" style={{ padding: '1.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.25rem', flexWrap: 'wrap' }}>
+                <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: net.accent, boxShadow: `0 0 10px ${net.accent}`, flexShrink: 0 }}></span>
+                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>{net.label}</h3>
+                <span className="badge badge-success" style={{ marginLeft: 'auto', fontSize: '0.68rem' }}>✓ {h('contractsVerified')}</span>
+              </div>
+              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', fontFamily: 'monospace' }}>{net.badge}</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>· {net.note}</span>
+              </div>
+              {[
+                { name: 'AttestationStore', addr: net.store },
+                { name: 'ComplianceGate', addr: net.gate },
+              ].map((c) => (
+                <div key={c.name} style={{ paddingTop: '0.75rem', paddingBottom: '0.75rem', borderTop: '1px solid var(--border)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem', gap: '0.5rem' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{c.name}</span>
+                    <a href={`${net.base}/${c.addr}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.72rem', color: 'var(--accent-light)', flexShrink: 0 }}>{h('contractsViewSnowtrace')}</a>
+                  </div>
+                  <code style={{ display: 'block', fontFamily: 'monospace', fontSize: '0.76rem', color: 'var(--text-primary)', wordBreak: 'break-all', background: 'var(--bg-secondary)', padding: '0.45rem 0.65rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>{c.addr}</code>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── How It Works ── */}
       <section id="how-it-works" aria-labelledby="how-title" className="container section">
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>

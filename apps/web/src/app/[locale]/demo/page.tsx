@@ -35,9 +35,11 @@ interface CheckResult {
   accessGranted: boolean;
 }
 
-// Demo wallet address — this is the seeded verified address from seed-fuji.ts
-// Update this when redeploying or re-seeding attestations
-const DEMO_VERIFIED_WALLET = "0xD65042534CE80fcb641fd6Eb99a16eBF6C0cd076";
+// Seeded verified example address per network.
+//  - Fuji: seeded by seed-fuji.ts at Tier 4 (KYB)
+//  - Mainnet: the KUMPLY verifier wallet, issued Tier 4 manually in beta
+const DEMO_VERIFIED_WALLET_FUJI = "0xD65042534CE80fcb641fd6Eb99a16eBF6C0cd076";
+const DEMO_VERIFIED_WALLET_MAINNET = "0x55a3D0a6bF61bFcE5b2526cd6e089545007aFE8D";
 const DEAD_WALLET = "0x000000000000000000000000000000000000dead";
 
 const USE_CASES = [
@@ -47,7 +49,7 @@ const USE_CASES = [
     title: "DeFi Protocol Access",
     description: "A lending protocol requires Tier 2 (Standard KYC) to deposit funds. The seeded demo wallet holds a real on-chain credential; the second wallet has none.",
     requiredTier: 2,
-    walletA: DEMO_VERIFIED_WALLET,
+    walletA: DEMO_VERIFIED_WALLET_FUJI,
     walletB: DEAD_WALLET,
     walletALabel: "Demo wallet — seeded credential",
     walletBLabel: "Unverified wallet",
@@ -58,7 +60,7 @@ const USE_CASES = [
     title: "RWA Tokenized Asset",
     description: "A tokenized real estate fund requires Tier 4 (Business / KYB). Only corporate entities may invest.",
     requiredTier: 4,
-    walletA: DEMO_VERIFIED_WALLET,
+    walletA: DEMO_VERIFIED_WALLET_FUJI,
     walletB: DEAD_WALLET,
     walletALabel: "Demo wallet — seeded credential",
     walletBLabel: "Unverified wallet",
@@ -69,7 +71,7 @@ const USE_CASES = [
     title: "AI Agent Marketplace",
     description: "An on-chain AI marketplace requires Tier 5 (KYA) to list autonomous agents for trading. The demo wallet is a business (Tier 4), not a registered agent — watch it get rejected.",
     requiredTier: 5,
-    walletA: DEMO_VERIFIED_WALLET,
+    walletA: DEMO_VERIFIED_WALLET_FUJI,
     walletB: DEAD_WALLET,
     walletALabel: "Demo wallet — seeded credential",
     walletBLabel: "Unverified wallet",
@@ -82,6 +84,7 @@ export default function DemoPage() {
   const { open } = useAppKit();
   const { network, contractAddress, complianceGateAddress } = useKumplyNetwork();
   const explorerUrl = network === "mainnet" ? "https://snowtrace.io" : "https://testnet.snowtrace.io";
+  const verifiedExample = network === "mainnet" ? DEMO_VERIFIED_WALLET_MAINNET : DEMO_VERIFIED_WALLET_FUJI;
 
   const [selectedUseCase, setSelectedUseCase] = useState(USE_CASES[0]);
   const [customAddress, setCustomAddress] = useState("");
@@ -129,8 +132,9 @@ export default function DemoPage() {
   }
 
   function handleUseCaseDemo() {
+    // walletA is network-aware: use the verified example for the active network
     runCheck(
-      [selectedUseCase.walletA, selectedUseCase.walletB],
+      [verifiedExample, selectedUseCase.walletB],
       selectedUseCase.requiredTier,
       [selectedUseCase.walletALabel, selectedUseCase.walletBLabel]
     );
@@ -159,7 +163,7 @@ export default function DemoPage() {
       <div style={{ textAlign: "center", marginBottom: "3rem" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "var(--bg-card)", padding: "0.4rem 1rem", borderRadius: "var(--radius-full)", border: "1px solid var(--border)", marginBottom: "1rem" }}>
           <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "var(--success)", boxShadow: "0 0 10px var(--success)", flexShrink: 0 }}></span>
-          <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-secondary)" }}>Live Demo · Fuji Testnet</span>
+          <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-secondary)" }}>Live Demo · {network === "mainnet" ? "Mainnet C-Chain" : "Fuji Testnet"}</span>
         </div>
         <h1 className="page-title" style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
           {t("title")}

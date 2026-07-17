@@ -186,7 +186,7 @@ export default function DashboardPage() {
       <div style={{ marginBottom: "2.5rem" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "var(--bg-card)", padding: "0.4rem 1rem", borderRadius: "var(--radius-full)", border: "1px solid var(--border)", marginBottom: "1rem" }}>
           <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "var(--success)", boxShadow: "0 0 10px var(--success)", flexShrink: 0 }}></span>
-          <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-secondary)" }}>Fuji Testnet · Live</span>
+          <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-secondary)" }}>{network === "mainnet" ? "Mainnet C-Chain · Live" : "Fuji Testnet · Live"}</span>
         </div>
         <h1 className="page-title dashboard-title">
           {t("title")}

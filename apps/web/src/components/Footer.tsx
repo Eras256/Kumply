@@ -42,7 +42,8 @@ export function Footer() {
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6 }}>
               {tFooter('brandDesc')}
             </p>
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+            <div style={{ display: 'flex', gap: '0.6rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+              <span className="badge badge-success">Mainnet C-Chain</span>
               <span className="badge badge-accent">Fuji Testnet</span>
               <span className="badge badge-info">Compliance Infra</span>
             </div>
