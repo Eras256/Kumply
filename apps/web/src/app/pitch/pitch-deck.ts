@@ -195,7 +195,7 @@ export const DECK_HTML = `
     </div>
     <div class="footer-links">
       <a href="https://kumply.xyz">kumply.xyz</a>
-      <a href="https://github.com/Eras256/Kumply">github.com/Eras256/Kumply</a>
+      <a href="https://github.com/kumplyprotocol/Kumply">github.com/kumplyprotocol/Kumply</a>
       <a href="https://www.npmjs.com/package/@kumply/sdk">npm: @kumply/sdk</a>
     </div>
   </section>
@@ -557,7 +557,7 @@ export const DECK_HTML = `
       <a href="https://kumply.xyz">kumply.xyz</a>
       <a href="https://kumply.xyz/demo">Live demo</a>
       <a href="https://kumply.xyz/verify">Verification flow</a>
-      <a href="https://github.com/Eras256/Kumply">GitHub</a>
+      <a href="https://github.com/kumplyprotocol/Kumply">GitHub</a>
       <a href="https://www.npmjs.com/package/@kumply/sdk">@kumply/sdk</a>
       <a href="https://snowtrace.io/address/0xa116261Ed3a848A9E1cd34923D5A0442D1455F71">Snowtrace</a>
     </div>

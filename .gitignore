@@ -64,3 +64,11 @@ missing_in_*.txt
 
 # Internal legal analysis — never commit
 KumplyMainnet.md
+
+# Internal strategy docs — live in kumplyprotocol/internal (private), kept locally for AI assistants
+/CLAUDE.md
+/claude_estrategico.md
+/.clinerules
+/.cursorrules
+/.windsurfrules
+/.agents/

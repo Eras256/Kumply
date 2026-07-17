@@ -61,7 +61,7 @@ Al finalizar **cualquier tarea significativa**, es TU OBLIGACIÓN actualizar:
 
 | Métrica | Valor |
 |---------|-------|
-| **Tests** | 157 passing (110 contracts + 30 SDK + 17 API) |
+| **Tests** | 164 passing (110 contracts + 37 SDK + 17 API) |
 | **Contratos** | AttestationStore + ComplianceGate en Fuji (chainId 43113) |
 | **Páginas** | 10 (Home, Verify, Demo, Dashboard, Network, Tiers, Developers, Solutions, Legal, Docs) |
 | **Stack** | Solidity 0.8.28 · Next.js 16 · React 19 · Express · Wagmi · Viem · pnpm workspaces |
@@ -90,6 +90,7 @@ Al finalizar **cualquier tarea significativa**, es TU OBLIGACIÓN actualizar:
 - Variables del browser: `NEXT_PUBLIC_*` en `apps/web/.env.local`
 - Variables del servidor: sin prefijo, también en `apps/web/.env.local`
 - Toda página usa `useTranslations()` de `next-intl`
+- En Next.js 16, el middleware se llama `proxy.ts` (en `src/` o root) y debe exportar una función llamada `proxy`.
 
 ### Testing
 - `pnpm test` corre todo el monorepo
@@ -103,7 +104,7 @@ Al finalizar **cualquier tarea significativa**, es TU OBLIGACIÓN actualizar:
 ## 6. EQUIPO, APLICACIONES Y GRANTS (ver `CLAUDE.md` §9 para detalle completo)
 
 ### Founders
-- **Giovanny Amador** — Co-founder, Technical/Builder lead (contratos, L1, SDK, infra). GitHub: [Eras256](https://github.com/Eras256), repo KUMPLY público: [Eras256/Kumply](https://github.com/Eras256/Kumply). X: [@vaiossx](https://x.com/vaiossx).
+- **Giovanny Amador** — Co-founder, Technical/Builder lead (contratos, L1, SDK, infra). GitHub: [Eras256](https://github.com/Eras256), repo KUMPLY público: [kumplyprotocol/Kumply](https://github.com/kumplyprotocol/Kumply). X: [@vaiossx](https://x.com/vaiossx).
 - **Monserrat Mendoza** — Co-founder, Product/Design/Content lead. GitHub: [M0nsxx](https://github.com/M0nsxx) (builder comprobada, Solidity/Rust/TS, **ETH Uruguay 2025 winner**, stack de diseño). X: [@smithserrat](https://x.com/smithserrat). El código de KUMPLY vive en el git de Giovanny.
 
 ### Team1 Network (members.team1.network)

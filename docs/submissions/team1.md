@@ -25,13 +25,13 @@ Yes. KUMPLY is live on Avalanche Fuji testnet today:
 | KUMPLY Compliance L1 (Subnet-EVM) | Registered on P-Chain Fuji | SubnetID `2buHAwNvaybnQ6vQYRS4TeXizZhAo33bhpnonAJu21CKYLZoST` |
 | Sumsub WebSDK + webhook | Live, end-to-end KYC flow | https://kumply.xyz/verify |
 | Public frontend | Live | https://kumply.xyz |
-| Open-source monorepo | Public, MIT | https://github.com/Eras256/Kumply |
+| Open-source monorepo | Public, MIT | https://github.com/kumplyprotocol/Kumply |
 | 157 unit tests | Green on every push | `.github/workflows/ci.yml` |
 
 ## 4. Whitepaper / litepaper
-- **Litepaper v1.1** (~3,000 words): https://github.com/Eras256/Kumply/blob/main/LITEPAPER.md
-- **Architecture diagrams** (Mermaid, GitHub-rendered): https://github.com/Eras256/Kumply/blob/main/docs/diagrams/architecture.md
-- **Full technical docs** (CLAUDE.md): https://github.com/Eras256/Kumply/blob/main/claude_estrategico.md
+- **Litepaper v1.1** (~3,000 words): https://github.com/kumplyprotocol/Kumply/blob/main/LITEPAPER.md
+- **Architecture diagrams** (Mermaid, GitHub-rendered): https://github.com/kumplyprotocol/Kumply/blob/main/docs/diagrams/architecture.md
+- **Full technical docs** (CLAUDE.md): https://github.com/kumplyprotocol/Kumply/blob/main/claude_estrategico.md
 
 ## 5. Prototype
 - **Live URL:** https://kumply.xyz

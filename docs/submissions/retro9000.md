@@ -36,7 +36,7 @@ The product has two layers, both production-grade today:
 **Software-only positioning:** no custody, no fiat/crypto exchange, no tradable assets, no DEX listing for KMP. Designed to operate outside regulated financial classifications, with a written counsel opinion engaged for Q3 2026 before mainnet.
 
 ## Repository
-https://github.com/Eras256/Kumply
+https://github.com/kumplyprotocol/Kumply
 
 ## Live demo
 https://kumply.xyz
@@ -45,7 +45,7 @@ https://kumply.xyz/demo (ComplianceGate live check)
 https://kumply.xyz/dashboard (on-chain attestation explorer)
 
 ## Litepaper
-https://github.com/Eras256/Kumply/blob/main/LITEPAPER.md (v1.1, ~3K words)
+https://github.com/kumplyprotocol/Kumply/blob/main/LITEPAPER.md (v1.1, ~3K words)
 
 ## On-chain contracts (Fuji testnet, chainId 43113)
 
@@ -64,9 +64,9 @@ https://github.com/Eras256/Kumply/blob/main/LITEPAPER.md (v1.1, ~3K words)
 ## Tests
 157 tests passing across 4 CI parallel jobs (110 contracts + 30 SDK + 17 API). See `.github/workflows/ci.yml`. Status: green on every push.
 
-- Contracts (Hardhat + Chai): https://github.com/Eras256/Kumply/tree/main/contracts/test
-- SDK (Vitest): https://github.com/Eras256/Kumply/tree/main/packages/sdk/test
-- API (Vitest + Supertest): https://github.com/Eras256/Kumply/tree/main/apps/api/test
+- Contracts (Hardhat + Chai): https://github.com/kumplyprotocol/Kumply/tree/main/contracts/test
+- SDK (Vitest): https://github.com/kumplyprotocol/Kumply/tree/main/packages/sdk/test
+- API (Vitest + Supertest): https://github.com/kumplyprotocol/Kumply/tree/main/apps/api/test
 
 ## On-chain activity / impact metrics (as of submission)
 

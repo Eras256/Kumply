@@ -1,7 +1,7 @@
 # Marketing assets — submissions support
 
 > Drafts para tweets pinneados, script del demo video, y posts en LinkedIn.
-> Todos los links apuntan a `kumply.xyz`, repo `Eras256/Kumply`, addresses on-chain reales.
+> Todos los links apuntan a `kumply.xyz`, repo `kumplyprotocol/Kumply`, addresses on-chain reales.
 
 ---
 
@@ -47,7 +47,7 @@ ACP-99 compliant, 110 tests passing.
 Submitting to Retro9000 R3 today.
 
 🔗 https://kumply.xyz
-📄 LITEPAPER → github.com/Eras256/Kumply
+📄 LITEPAPER → github.com/kumplyprotocol/Kumply
 🧪 Snowtrace: testnet.snowtrace.io/address/0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76
 
 🧵 ↓
@@ -111,7 +111,7 @@ Agent), ACP-99 compliant, 110 tests pasando.
 Aplicando a Retro9000 R3 hoy.
 
 🔗 https://kumply.xyz
-📄 Litepaper → github.com/Eras256/Kumply
+📄 Litepaper → github.com/kumplyprotocol/Kumply
 
 🧵 ↓
 ```
@@ -163,9 +163,9 @@ Solo founder, full-stack, código MIT. Buscando:
 • Despacho de enterprise mexicano (Galicia / Mijares / Creel) para opinión
     pre-mainnet
 
-→ Repo: github.com/Eras256/Kumply
+→ Repo: github.com/kumplyprotocol/Kumply
 → Sitio: kumply.xyz
-→ Litepaper: github.com/Eras256/Kumply/blob/main/LITEPAPER.md
+→ Litepaper: github.com/kumplyprotocol/Kumply/blob/main/LITEPAPER.md
 
 #Avalanche #Web3 #Compliance #LatAm #Enterprise #KYC #ACP99 #InstitutionalDeFi
 ```
@@ -184,7 +184,7 @@ ACP-99 compliant. 157 tests. Software-only. Open source MIT.
 Submitting Retro9000 R3 today.
 
 → kumply.xyz
-→ github.com/Eras256/Kumply
+→ github.com/kumplyprotocol/Kumply
 ```
 
 ---
@@ -217,7 +217,7 @@ gastamos más tiempo.
 Saludos,
 [tu nombre]
 hello@kumply.xyz
-kumply.xyz · github.com/Eras256/Kumply
+kumply.xyz · github.com/kumplyprotocol/Kumply
 ```
 
 ---

@@ -10,7 +10,7 @@
 | **Network** | Avalanche (C-Chain + dedicated L1, ACP-77/99 compliant) |
 | **Stage** | Fuji testnet deployed · mainnet Q4 2026 |
 | **Tests passing** | 157 (110 contracts · 30 SDK · 17 API) |
-| **Repo** | https://github.com/Eras256/Kumply |
+| **Repo** | https://github.com/kumplyprotocol/Kumply |
 | **Live** | https://kumply.xyz (institutional landing + KYC flow) |
 
 ---
@@ -215,7 +215,7 @@ Four structural moats:
 | | |
 |---|---|
 | **Live demo** | https://kumply.xyz/verify |
-| **Repository** | https://github.com/Eras256/Kumply |
+| **Repository** | https://github.com/kumplyprotocol/Kumply |
 | **Snowtrace AttestationStore** | https://testnet.snowtrace.io/address/0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76 |
 | **Snowtrace ComplianceGate** | https://testnet.snowtrace.io/address/0x3Bf8F8ea2573Eb3f386aDF72D191869c4827062B |
 | **Snowtrace ValidatorSetManager** | https://testnet.snowtrace.io/address/0x903f6E46f965C9A1127652D761400dBe487F555D |

@@ -8,7 +8,7 @@ const COMPLIANCE_GATE = "0xcFDdeA5482baE9A6733B58F6a39FC36BCe6164cF";
 const VALIDATOR_SET_MANAGER = "0x903f6E46f965C9A1127652D761400dBe487F555D";
 const L1_SUBNET_ID = "2buHAwNvaybnQ6vQYRS4TeXizZhAo33bhpnonAJu21CKYLZoST";
 const L1_BLOCKCHAIN_ID = "2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b";
-const REPO = "https://github.com/Eras256/Kumply";
+const REPO = "https://github.com/kumplyprotocol/Kumply";
 
 const SECTION_PADDING: React.CSSProperties = { padding: "1.5rem", marginBottom: "1.25rem" };
 const HEAD_FLEX: React.CSSProperties = { display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "1rem" };

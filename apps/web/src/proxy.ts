@@ -4,7 +4,7 @@ import { NextRequest } from 'next/server';
 
 const handleI18nRouting = createMiddleware(routing);
 
-export default async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   // Clear the accept-language header so next-intl ignores browser language
   // and falls back to defaultLocale (en), while still respecting the NEXT_LOCALE cookie.
   request.headers.set('accept-language', '');

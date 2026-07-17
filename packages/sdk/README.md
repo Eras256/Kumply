@@ -143,7 +143,7 @@ import {
 | Avalanche Fuji           | `fuji`        | 43113    | **Live** (full suite + automated KYC) | https://testnet.snowtrace.io |
 | KUMPLY Compliance L1     | `kumply-l1`   | 43210    | Registered on Fuji · validator activation pending | https://testnet.avascan.info |
 
-The **KUMPLY Compliance L1** is a custom Avalanche L1 (ACP-77 + ACP-99) where only KYB-verified institutions can validate. The chain is registered on the Fuji P-Chain with its genesis committed; the ACP-99 `KumplyValidatorSetManager` is deployed and verified. See [kumply.xyz/l1](https://kumply.xyz/l1) for live status and [`contracts/l1/`](https://github.com/Eras256/Kumply/tree/main/contracts/l1) for the architecture.
+The **KUMPLY Compliance L1** is a custom Avalanche L1 (ACP-77 + ACP-99) where only KYB-verified institutions can validate. The chain is registered on the Fuji P-Chain with its genesis committed; the ACP-99 `KumplyValidatorSetManager` is deployed and verified. See [kumply.xyz/l1](https://kumply.xyz/l1) for live status and [`contracts/l1/`](https://github.com/kumplyprotocol/Kumply/tree/main/contracts/l1) for the architecture.
 
 ## Using ABIs directly with viem
 
