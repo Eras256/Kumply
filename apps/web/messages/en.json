@@ -85,7 +85,16 @@
     "tier4Name": "Business",
     "tier4Desc": "Corporate verification (KYB). Validates company registration, directors, and beneficial owners for institutional use.",
     "tier5Name": "AI Agent",
-    "tier5Desc": "Verify the AI agents and autonomous software operating on behalf of your company. The first compliance standard for agentic systems."
+    "tier5Desc": "Verify the AI agents and autonomous software operating on behalf of your company. The first compliance standard for agentic systems.",
+    "mainnetTitle": "Mainnet C-Chain Beta",
+    "mainnetSubtitle": "KUMPLY is live on the Avalanche Mainnet C-Chain in read-only beta phase with 0 USD verification fee.",
+    "mainnetStatus": "Verification Status",
+    "mainnetStatusDesc": "Manual verification during the beta phase. For institutional integration or custom attestation issuance, contact our team.",
+    "mainnetFee": "Verification Fee",
+    "mainnetFeeDesc": "$0 USD (normal Avalanche C-Chain transaction fees apply)",
+    "mainnetContracts": "Deployed Contracts (Mainnet)",
+    "mainnetStore": "Attestation Store",
+    "mainnetGate": "Compliance Gate"
   },
   "Verify": {
     "pageTitle": "Get Your Credential",
