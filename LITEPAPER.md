@@ -8,8 +8,8 @@
 |---|---|
 | **Category** | Identity · Enterprise · Infrastructure |
 | **Network** | Avalanche (C-Chain + dedicated L1, ACP-77/99 compliant) |
-| **Stage** | Fuji testnet deployed · mainnet Q4 2026 |
-| **Tests passing** | 157 (110 contracts · 30 SDK · 17 API) |
+| **Stage** | Fuji testnet deployed · Mainnet C-Chain read-only beta live (query fee = 0) · full mainnet Q4 2026 |
+| **Tests passing** | 164 (110 contracts · 37 SDK · 17 API) |
 | **Repo** | https://github.com/kumplyprotocol/Kumply |
 | **Live** | https://kumply.xyz (institutional landing + KYC flow) |
 
@@ -112,7 +112,7 @@ This is unique in the Avalanche ecosystem: it's the first L1 whose **security** 
 
 KUMPLY closes the critical institutional adoption gap **and** opens a new primitive — verified autonomous agents — that doesn't exist anywhere else in the L1 ecosystem.
 
-1. **🤖 KYA — Know Your Agent (unique in the Avalanche ecosystem)** — Tier 5 verifies autonomous AI agents and bots before they touch capital on-chain. With agentic DeFi (LangChain-style on-chain agents, autonomous market makers, AI portfolio managers) projected to drive 15–30% of DeFi transaction volume by end of 2026, every protocol will need a way to distinguish trusted, bounded agents from anonymous scripts. KUMPLY is the first L1 in Avalanche — and to our knowledge in any EVM L1 — purpose-built for it. **No other Avalanche L1 has this**. Section 4.1 below details the mechanism.
+1. **🤖 KYA — Know Your Agent (unique in the Avalanche ecosystem)** — Tier 5 verifies autonomous AI agents and bots before they touch capital on-chain. As agentic DeFi grows (LangChain-style on-chain agents, autonomous market makers, AI portfolio managers), protocols need a way to distinguish trusted, bounded agents from anonymous scripts. To our knowledge, no other Avalanche L1 — and no other major EVM L1 — ships a purpose-built primitive for this today. Section 4.1 below details the mechanism.
 2. **Brings real banks on-chain** — designed around the requirements of Mexican digital banks, venture funds, and LatAm enterprises. A KYB-gated L1 is the first deployment vehicle they can operate without straddling unclear regulatory perimeters.
 3. **Open to retail users, not just institutions** — The L1 is a full home for the 5-tier compliance spectrum. Retail KYC users (Tiers 1–3) can transact freely; institutional accounts (Tier 4) can deploy contracts and validate; agents (Tier 5) can operate within bounded budgets. Compliance composes at the application layer via `ComplianceGate`, not by walling off the chain.
 4. **Composable with existing Avalanche DeFi** — `ComplianceGate` integrates as a 3-line dependency for any C-Chain DApp wanting tiered users (Trader Joe institutional pools, GMX accredited markets, Benqi qualified lending).
@@ -174,17 +174,18 @@ Testnet (Fuji) genesis allocation: **1,000,000,000 KMP, 100% to the KUMPLY opera
 | Quarter | Milestone | Status |
 |---|---|---|
 | **Q1 2026** | AttestationStore + ComplianceGate deployed and verified on Fuji | ✅ Done |
-| **Q2 2026** | ACP-99 ValidatorSetManager refactor · 110 tests passing · litepaper · grant submissions (Retro9000 R3 by 18 May, Team1, Blizzard) | ✅ Done (this litepaper) |
+| **Q2 2026** | ACP-99 ValidatorSetManager refactor · 110 contract tests passing · litepaper published | ✅ Done |
 | **Q2 2026** | KUMPLY Compliance L1 chain registered on Fuji (validator activation pending) · Sumsub integration end-to-end · institutional demo presented | ✅ Done |
+| **Q3 2026** | Mainnet C-Chain read-only beta: `AttestationStore` + `ComplianceGate` deployed with query fee = 0, free SDK reads | ✅ Done |
 | **Q3 2026** | Mexican legal written opinion · corporate structure final · T&Cs published · smart-contract audit (Code4rena or OpenZeppelin) · Verifier-as-a-Service program · **AttestationStoreL1.sol** (ICM-mirrored attestation read on the L1, sub-second tier lookups for L1-native DApps) · **AgentRegistry.sol** (KYA Tier-5 extension with model fingerprint, behavior bounds, liveness oracle) · agentic-DeFi pilot DApp | 📋 Planned |
-| **Q4 2026** | Mainnet launch (KMP genesis re-defined by governance) · first three institutional validators · live attestations for a first institutional partner's customers · live KYA attestations for at least one autonomous-agent DeFi protocol on the L1 · cross-L1 attestation propagation demo across 3 Avalanche L1s | 📋 Planned |
+| **Q4 2026** | Full mainnet: paid `checkCompliance` queries enabled on C-Chain · KUMPLY L1 mainnet (KMP genesis re-defined by governance) · first three institutional validators · live attestations for a first institutional partner's customers · live KYA attestations for at least one autonomous-agent DeFi protocol on the L1 · cross-L1 attestation propagation demo across 3 Avalanche L1s | 📋 Planned |
 | **Q1 2027** | Multi-jurisdiction tier expansion (Colombia, Brazil, Chile) · stablecoin partnership · ICTT KMP↔AVAX bridge (if governance approves) | 📋 Planned |
 
 ## 8. Team & Traction
 
-- **Built solo during the Avalanche LatAm Institutional Hackathon (May 15–17, 2026)** — full-stack from Solidity to Next.js frontend, with verified on-chain deployments.
-- **Code:** monorepo with pnpm workspaces — contracts, SDK, API, web — 157 tests, CI on every push (GitHub Actions, 4 parallel jobs).
-- **Institutional pipeline:** outreach underway to Mexican digital banks, venture funds, and LatAm enterprises; names will be disclosed once relationships are formalized.
+- **Two co-founders.** Giovanny Amador — technical lead: smart contracts, L1, SDK and infrastructure (authorship visible in the public commit history). Monserrat Mendoza — product, design and content lead; ETH Uruguay 2025 hackathon winner. Both are Team1 Network Collaborators (accepted July 2026).
+- **Code:** monorepo with pnpm workspaces — contracts, SDK, API, web — 164 tests, CI on every push (GitHub Actions, 4 parallel jobs).
+- **Go-to-market:** targeting Mexican digital banks, venture funds and LatAm enterprises. No commercial agreements are signed to date; any partner will be named only once a relationship is formalized.
 - **Open source:** MIT licensed, public GitHub, no proprietary lock-in.
 - **Public commitment:** all smart contracts will be immutably renounced to a 3-of-5 multisig before mainnet; KMP mainnet genesis defined by community governance; quarterly treasury transparency reports starting Q4 2026.
 
@@ -194,20 +195,19 @@ We are applying to:
 
 | Program | Amount | Use of funds |
 |---|---|---|
-| **Avalanche Retro9000 R3** (deadline 18 May 2026, 6PM UTC) | Discretionary | Validator-set bootstrap (3 institutional validators × 6 months P-Chain fees) and OpenZeppelin smart-contract audit |
-| **Team1 Mini-Grant** | $5,000 USDC | Litepaper translation (EN/ES/PT), 30-second institutional pitch video, integration docs for top 5 Avalanche DApps |
-| **Blizzard Fund** | Seed round, terms TBD | Operating runway 12 months (legal, audits, BD), 3 engineering hires, Mexico City office |
-| **Team1 Phases 2–4** | Milestone-based | Verifier-as-a-Service rollout, Colombia + Brazil expansion |
+| **Team1 Mini-Grant** | $10,000 USD, modular | Four milestones, fundable in tranches: **M1 ($1,500)** security hardening of `AttestationStore` + `ComplianceGate` (Slither, Aderyn, fuzzing, threat model) · **M2 ($3,500)** Sumsub production activation and first real KYC/KYB on C-Chain · **M3 ($2,000)** on-chain query-fee activation on Mainnet C-Chain · **M4 ($3,000)** Fuji L1 validator activation, ICM integration, 2 integration pilots. $5,000 funds M1–M2; $7,000 adds M3; $10,000 completes M4. Excludes formal L1 audit. |
+| **Avalanche Retro9000** (C-Chain, future round) | Retroactive | Bringing KUMPLY to mainnet as compliance infrastructure: institutional validator-set bootstrap and formal smart-contract audit |
+| **Blizzard Fund** | Seed round, terms TBD | Operating runway 12 months (legal, audits, BD) and engineering hires |
 
-Total ask across grants + seed: targeting $500K – $1.5M over 12 months. Capital efficiency is core: at $0.50 per-check pricing, breakeven on operating costs is reached at ~50K monthly verifications — a single mid-size LatAm enterprise customer.
+Capital efficiency is core: at $0.50 per-check pricing, breakeven on operating costs is reached at ~50K monthly verifications — a single mid-size LatAm enterprise customer.
 
 ## 10. Why We Win
 
 Four structural moats:
 
-1. **KYA category leadership.** Verified-agent infrastructure is a greenfield primitive — no incumbent on Avalanche, no incumbent on any major EVM L1. KUMPLY ships the on-chain registry, the tier-5 attestation flow, and the reference DApp integration. First-mover with technical lock-in: by the time agentic-DeFi becomes a $5B+ category in 2027, KUMPLY is the address every agent registers against.
+1. **KYA category leadership.** Verified-agent infrastructure is a greenfield primitive — we are aware of no incumbent on Avalanche or on any major EVM L1. The Tier-5 attestation flow is live in `AttestationStore.sol` today; the `AgentRegistry.sol` extension and the reference DApp integration are the next ships (Q3 2026). First-mover position in a category we expect to matter as agentic DeFi scales.
 2. **Network effects on compliance data.** Every additional institution that trusts KUMPLY attestations makes the next institution's onboarding decision easier. Once a first Mexican digital bank integrates, every other Mexican bank evaluating Web3 inherits a de-facto standard. Same dynamic for KYA: once a major agentic DeFi protocol requires KUMPLY Tier 5, every competing agent must register.
-3. **Regulatory positioning that scales.** Software-only avoids regulated financial activity triggers, allowing us to operate in Mexico without a banking license and to replicate the same model jurisdiction-by-jurisdiction in LatAm without re-architecting.
+3. **Regulatory positioning that scales.** The software-only design — no custody, no exchange, no transmission of funds — is intended to keep KUMPLY outside regulated financial activity, and is architected to replicate jurisdiction-by-jurisdiction across LatAm without re-engineering. A written Mexican counsel opinion is engaged and pending; we make no legal determination ahead of it.
 4. **Native ACP-99 implementation as the reference.** Other institutional L1s on Avalanche will need a KYB-gated ValidatorSetManager. Our open-source implementation becomes the canonical pattern, with KUMPLY positioned as the identity layer they integrate against.
 
 ## 11. Resources
@@ -216,13 +216,15 @@ Four structural moats:
 |---|---|
 | **Live demo** | https://kumply.xyz/verify |
 | **Repository** | https://github.com/kumplyprotocol/Kumply |
+| **Mainnet AttestationStore** (C-Chain, beta) | https://snowtrace.io/address/0xa116261Ed3a848A9E1cd34923D5A0442D1455F71 |
+| **Mainnet ComplianceGate** (C-Chain, beta) | https://snowtrace.io/address/0x01BEEA13A485c7bAD58f926E345325e9e3773bEe |
 | **Snowtrace AttestationStore** | https://testnet.snowtrace.io/address/0x9Bbb0797EA92277c268fe7E45BdB16b70E787d76 |
 | **Snowtrace ComplianceGate** | https://testnet.snowtrace.io/address/0x3Bf8F8ea2573Eb3f386aDF72D191869c4827062B |
 | **Snowtrace ValidatorSetManager** | https://testnet.snowtrace.io/address/0x903f6E46f965C9A1127652D761400dBe487F555D |
 | **L1 Subnet ID** | `2buHAwNvaybnQ6vQYRS4TeXizZhAo33bhpnonAJu21CKYLZoST` |
 | **L1 Blockchain ID** | `2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b` |
 | **L1 RPC URL** | `https://subnets.avax.network/2pyvAQK1WQ318yHtnv4ZQeL9hWeJmmgMp9MEHqpJnDYttQEL6b/rpc` |
-| **Tests CI status** | 157 passing, 4 parallel jobs, 100% green |
+| **Tests CI status** | 164 passing (110 contracts · 37 SDK · 17 API), 4 parallel jobs, 100% green |
 | **Twitter / X** | @kumply_xyz |
 | **Contact** | hello@kumply.xyz |
 

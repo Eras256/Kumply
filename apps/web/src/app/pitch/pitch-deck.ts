@@ -267,7 +267,7 @@ export const DECK_HTML = `
     </div>
     <h2>Don't trust the deck. Click it.</h2>
     <div class="grid cols-3">
-      <div class="cell"><div class="kpi">157</div><div class="kpi-label">automated tests, CI on every push</div></div>
+      <div class="cell"><div class="kpi">164</div><div class="kpi-label">automated tests, CI on every push</div></div>
       <div class="cell"><div class="kpi">&lt; 1 s</div><div class="kpi-label">on-chain credential lookup</div></div>
       <div class="cell"><div class="kpi">~3 s</div><div class="kpi-label">KYC approval → credential on-chain</div></div>
     </div>
@@ -361,7 +361,7 @@ export const DECK_HTML = `
       <div class="cell">
         <h3>ACP-99 ValidatorSetManager, KYB-gated</h3>
         <p>Our <code>KumplyValidatorSetManager</code> implements the full two-phase validator lifecycle with
-        Avalanche-codec Warp payloads — and adds a requirement no other L1 has: validators must hold a live
+        Avalanche-codec Warp payloads — and adds a requirement we have not seen on another L1: validators must hold a live
         Tier-4 attestation. 27 dedicated tests.</p>
       </div>
       <div class="cell">
@@ -452,7 +452,7 @@ export const DECK_HTML = `
     <div class="grid cols-3">
       <div class="cell">
         <h3>Beachhead</h3>
-        <p>Mexican digital banks and venture funds — outreach underway through the Avalanche LatAm community.</p>
+        <p>Mexican digital banks and venture funds, reached through the Avalanche LatAm community. No commercial agreements signed to date.</p>
       </div>
       <div class="cell">
         <h3>Expansion</h3>
@@ -525,7 +525,7 @@ export const DECK_HTML = `
       integrations. What this budget deliberately does <strong>not</strong> include: a formal third-party audit of the L1
       validator manager, scoped for Retro9000 / Accelerator funding once mainnet usage proves demand. Nothing this grant
       puts on mainnet custodies user funds. <strong>Already shipped self-funded before this application</strong> — and not
-      billed to it: the mainnet C-Chain launch of the non-custodial core (verified on Snowtrace), the 157-test suite with CI,
+      billed to it: the mainnet C-Chain launch of the non-custodial core (verified on Snowtrace), the 164-test suite with CI,
       the published SDK on npm, and the live dashboard/demo at kumply.xyz.</p>
   </section>
 

@@ -388,7 +388,7 @@
     "subtitle": "Everything you need to integrate KUMPLY — smart contracts, SDK, REST API, the Compliance L1, and the KYA Tier-5 primitive.",
     "badges": {
       "network": "Avalanche Fuji",
-      "tests": "157 tests passing"
+      "tests": "164 tests passing"
     },
     "toc": {
       "heading": "Contents",
@@ -521,7 +521,7 @@
     "resources": {
       "title": "Resources",
       "subtitle": "Everything else — repo, paper, explorers, standards, and contact.",
-      "github": "Source code, issues, CI status (157 tests).",
+      "github": "Source code, issues, CI status (164 tests).",
       "litepaper": "Full product + technical brief (~3K words).",
       "snowtrace": "Verified contracts on Fuji.",
       "acp99": "Avalanche L1 ValidatorSetManager standard.",

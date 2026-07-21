@@ -51,6 +51,8 @@ Memory.md
 LEGAL_REVIEW_BRIEF.md
 LEGAL_*.md
 INTERNAL_*.md
+# Grant/submission drafts + operational runbooks — live in kumplyprotocol/internal
+docs/submissions/
 docs/internal/
 claude_estrategico.md
 

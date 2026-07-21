@@ -388,7 +388,7 @@
     "subtitle": "Todo lo que necesitas para integrar KUMPLY — smart contracts, SDK, REST API, la Compliance L1, y la primitiva KYA Tier-5.",
     "badges": {
       "network": "Avalanche Fuji",
-      "tests": "157 tests pasando"
+      "tests": "164 tests pasando"
     },
     "toc": {
       "heading": "Contenido",
@@ -521,7 +521,7 @@
     "resources": {
       "title": "Recursos",
       "subtitle": "Todo lo demás — repo, paper, explorers, estándares, y contacto.",
-      "github": "Código fuente, issues, estado de CI (157 tests).",
+      "github": "Código fuente, issues, estado de CI (164 tests).",
       "litepaper": "Brief completo producto + técnico (~3K palabras).",
       "snowtrace": "Contratos verificados en Fuji.",
       "acp99": "Estándar ValidatorSetManager de Avalanche L1.",

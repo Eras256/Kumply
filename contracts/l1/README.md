@@ -42,7 +42,7 @@ This folder contains everything needed to spin up the **KUMPLY Compliance L1** o
 
 ---
 
-## Deployment flow (post-hackathon)
+## Deployment flow
 
 ```bash
 # 1) Create the L1 on Fuji testnet
